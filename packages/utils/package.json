@@ -1,12 +1,8 @@
 {
-  "name": "ui",
+  "name": "utils",
   "version": "0.0.0",
   "main": "./index.tsx",
   "types": "./index.tsx",
-  "license": "MIT",
-  "scripts": {
-    "lint": "eslint *.ts*"
-  },
   "devDependencies": {
     "tsconfig": "workspace:*",
     "@types/react": "18.0.21",
