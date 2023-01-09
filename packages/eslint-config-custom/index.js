@@ -19,4 +19,12 @@ module.exports = {
       },
     ],
   },
-};
+  parserOptions: {
+    babelOptions: {
+      presets: [require.resolve("next/babel")],
+    },
+  },
+}
+
+// fix for "Parsing error: Cannot find module 'next/babel'" issue
+// source: https://github.com/vercel/next.js/issues/40687#issuecomment-1264177674

@@ -5,10 +5,20 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "types": "tsc --noEmit"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.3",
+    "classnames": "^2.3.2",
+    "graphql": "15.8.0",
+    "graphql-ws": "^5.11.2",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
     "next": "13.0.0",
+    "next-auth": "^4.18.8",
+    "nodemailer": "^6.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "ui": "workspace:*",
@@ -16,16 +26,19 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "eslint-config-custom": "workspace:*",
-    "eslint": "7.32.0",
-    "tsconfig": "workspace:*",
-    "twconfig": "workspace:*",
+    "@types/jsonwebtoken": "^9.0.0",
+    "@types/lodash": "^4.14.191",
     "@types/node": "18.11.3",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
     "autoprefixer": "^10.4.12",
+    "eslint": "7.32.0",
+    "eslint-config-custom": "workspace:*",
     "postcss": "^8.4.18",
     "tailwindcss": "^3.2.4",
+    "tsconfig": "workspace:*",
+    "twconfig": "workspace:*",
     "typescript": "4.9.4"
   }
 }

@@ -1,4 +1,4 @@
-import { Button } from "ui";
+import { Button } from "ui"
 
 export const B2BComponent = () => (
   <div>
@@ -6,4 +6,4 @@ export const B2BComponent = () => (
 
     <Button />
   </div>
-);
+)

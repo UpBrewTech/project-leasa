@@ -5,7 +5,29 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
     },
+    "b2c#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**"],
+      "env": [
+        "NEXTAUTH_URL",
+        "EMAIL_SERVER",
+        "EMAIL_FROM",
+        "FACEBOOK_CLIENT_ID",
+        "FACEBOOK_CLIENT_SECRET",
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET",
+        "NEXTAUTH_SECRET",
+        "HASURA_GRAPHQL_ADMIN_SECRET",
+        "NEXT_PUBLIC_HASURA_GRAPHQL_API",
+        "NEXT_PUBLIC_HASURA_GRAPHQL_API_WS",
+        "NEXT_PUBLIC_CLOUDINARY_NAME",
+        "NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET"
+      ]
+    },
     "lint": {
+      "outputs": []
+    },
+    "types": {
       "outputs": []
     },
     "dev": {
