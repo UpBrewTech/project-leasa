@@ -1,9 +1,9 @@
-import ApolloClientProvider from "components/ApolloClientProvider"
-import PageAuth from "components/PageAuth"
-import { SessionProvider } from "next-auth/react"
-import type { AppProps } from "next/app"
-import Head from "next/head"
-import "../styles/globals.css"
+import ApolloClientProvider from 'components/ApolloClientProvider'
+import PageAuth from 'components/PageAuth'
+import { SessionProvider } from 'next-auth/react'
+import type { AppProps } from 'next/app'
+import Head from 'next/head'
+import '../styles/globals.css'
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const allowedRoles = (Component as any).allowedRoles

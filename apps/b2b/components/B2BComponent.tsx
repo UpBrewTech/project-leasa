@@ -1,5 +1,5 @@
-import { Button } from "ui";
-import { formatCurrency } from "utils";
+import { Button } from 'ui'
+import { formatCurrency } from 'utils'
 
 export const B2BComponent = () => (
   <div>
@@ -7,4 +7,4 @@ export const B2BComponent = () => (
     {formatCurrency(1000)}
     <Button />
   </div>
-);
+)

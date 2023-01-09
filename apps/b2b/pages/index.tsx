@@ -1,4 +1,4 @@
-import { B2BComponent } from "../components/B2BComponent";
+import { B2BComponent } from '../components/B2BComponent'
 
 export default function B2B() {
   return (
@@ -8,5 +8,5 @@ export default function B2B() {
       {/* {formatCurrency} */}
       <B2BComponent />
     </div>
-  );
+  )
 }

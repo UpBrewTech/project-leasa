@@ -1,9 +1,9 @@
-import Button from "components/Button"
-import { signIn } from "next-auth/react"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import { IconClose } from "ui/Icons"
-import PanelLayout from "ui/Layouts/Panel"
+import Button from 'components/Button'
+import { signIn } from 'next-auth/react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { IconClose } from 'ui/Icons'
+import PanelLayout from 'ui/Layouts/Panel'
 
 const Login = () => {
   const { push, query } = useRouter()
@@ -21,11 +21,11 @@ const Login = () => {
         <Button
           type="submit"
           className="w-full hidden"
-          loading={!!query.with && query.with === "facebook"}
-          disabled={!!query.with && query.with !== "facebook"}
+          loading={!!query.with && query.with === 'facebook'}
+          disabled={!!query.with && query.with !== 'facebook'}
           onClick={() => {
-            signIn("facebook", { callbackUrl: "/auth/login" })
-            push({ query: { with: "facebook" } })
+            signIn('facebook', { callbackUrl: '/auth/login' })
+            push({ query: { with: 'facebook' } })
           }}
         >
           Login with Facebook
@@ -33,11 +33,11 @@ const Login = () => {
         <Button
           type="submit"
           className="w-full"
-          loading={!!query.with && query.with === "google"}
-          disabled={!!query.with && query.with !== "google"}
+          loading={!!query.with && query.with === 'google'}
+          disabled={!!query.with && query.with !== 'google'}
           onClick={() => {
-            signIn("google", { callbackUrl: "/auth/login" })
-            push({ query: { with: "google" } })
+            signIn('google', { callbackUrl: '/auth/login' })
+            push({ query: { with: 'google' } })
           }}
         >
           Login with Google
@@ -48,6 +48,6 @@ const Login = () => {
 }
 
 Login.getLayout = PanelLayout
-Login.allowedRoles = ["public"]
+Login.allowedRoles = ['public']
 
 export default Login

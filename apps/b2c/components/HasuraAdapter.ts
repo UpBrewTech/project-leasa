@@ -5,12 +5,12 @@ import {
   AdapterAccount,
   AdapterUser,
   VerificationToken,
-} from "next-auth/adapters"
-import { doSSRFetch } from "utils/doSSRFetch"
+} from 'next-auth/adapters'
+import { doSSRFetch } from 'utils/doSSRFetch'
 
 const HasuraAdapter = (): Adapter<true> => {
   return {
-    createUser: async (user: Omit<AdapterUser, "id">) => {
+    createUser: async (user: Omit<AdapterUser, 'id'>) => {
       // console.debug("createUser")
 
       const data = await doSSRFetch({
@@ -43,7 +43,7 @@ const HasuraAdapter = (): Adapter<true> => {
     getUserByAccount: async ({
       provider,
       providerAccountId,
-    }: Pick<AdapterAccount, "provider" | "providerAccountId">) => {
+    }: Pick<AdapterAccount, 'provider' | 'providerAccountId'>) => {
       // console.debug("getUserByAccount")
 
       const data = await doSSRFetch({

@@ -1,13 +1,13 @@
-import HasuraAdapter from "components/HasuraAdapter"
-import jwt from "jsonwebtoken"
-import { NextApiRequest, NextApiResponse } from "next"
-import NextAuth, { Awaitable, User } from "next-auth"
-import { JWT } from "next-auth/jwt"
-import CredentialsProvider from "next-auth/providers/credentials"
-import EmailProvider from "next-auth/providers/email"
-import FacebookProvider from "next-auth/providers/facebook"
-import GoogleProvider from "next-auth/providers/google"
-import { doSSRFetch } from "utils/doSSRFetch"
+import HasuraAdapter from 'components/HasuraAdapter'
+import jwt from 'jsonwebtoken'
+import { NextApiRequest, NextApiResponse } from 'next'
+import NextAuth, { Awaitable, User } from 'next-auth'
+import { JWT } from 'next-auth/jwt'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import EmailProvider from 'next-auth/providers/email'
+import FacebookProvider from 'next-auth/providers/facebook'
+import GoogleProvider from 'next-auth/providers/google'
+import { doSSRFetch } from 'utils/doSSRFetch'
 
 const MAX_AGE = 24 * 60 * 60 // hr * min * sec
 
@@ -33,17 +33,17 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
       }),
       CredentialsProvider({
-        name: "Credentials",
+        name: 'Credentials',
         credentials: {
           username: {
-            label: "Username",
-            type: "text",
-            placeholder: "Username",
+            label: 'Username',
+            type: 'text',
+            placeholder: 'Username',
           },
           password: {
-            label: "Password",
-            type: "password",
-            placeholder: "Password",
+            label: 'Password',
+            type: 'password',
+            placeholder: 'Password',
           },
         },
         authorize: async (credentials) => {
@@ -72,14 +72,14 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
           exp: getExp({ exp: token?.exp, maxAge }),
         } as JWT
 
-        const encodedToken = jwt.sign(token, secret, { algorithm: "HS256" })
+        const encodedToken = jwt.sign(token, secret, { algorithm: 'HS256' })
         return Promise.resolve(encodedToken)
       },
       decode: async ({ token, secret }) => {
         if (!token) return null as Awaitable<null>
 
         const decodedToken = jwt.verify(token, secret, {
-          algorithms: ["HS256"],
+          algorithms: ['HS256'],
         })
         return decodedToken as Awaitable<JWT>
       },
@@ -94,17 +94,17 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         // console.log("jwt callback")
 
         if (user) {
-          const role = user.role ? user.role : "user"
+          const role = user.role ? user.role : 'user'
 
           token = {
             ...token,
-            "https://hasura.io/jwt/claims": {
-              "x-hasura-allowed-roles": [role],
-              "x-hasura-default-role": role,
-              "x-hasura-role": role,
-              ...(role === "user"
-                ? { "x-hasura-user-id": token.sub }
-                : { "x-hasura-account-id": token.sub }),
+            'https://hasura.io/jwt/claims': {
+              'x-hasura-allowed-roles': [role],
+              'x-hasura-default-role': role,
+              'x-hasura-role': role,
+              ...(role === 'user'
+                ? { 'x-hasura-user-id': token.sub }
+                : { 'x-hasura-account-id': token.sub }),
             },
           }
         }
@@ -115,14 +115,14 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         // console.log("session callback")
 
         const encodedToken = jwt.sign(token, process.env.NEXTAUTH_SECRET!, {
-          algorithm: "HS256",
+          algorithm: 'HS256',
         })
 
         session.user = {
           id: token.sub,
           name: token.name,
           email: token.email,
-          role: token["https://hasura.io/jwt/claims"]["x-hasura-role"],
+          role: token['https://hasura.io/jwt/claims']['x-hasura-role'],
           image: token.picture,
         } as User
         session.token = encodedToken
@@ -131,13 +131,13 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       },
     },
     session: {
-      strategy: "jwt",
+      strategy: 'jwt',
       maxAge: MAX_AGE,
     },
     pages: {
-      signIn: "/",
-      signOut: "/",
-      error: "404",
+      signIn: '/',
+      signOut: '/',
+      error: '404',
       // verifyRequest: "/auth/verify-request",
     },
   })

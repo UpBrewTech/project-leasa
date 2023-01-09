@@ -1,12 +1,12 @@
-import classNames from "classnames"
+import classNames from 'classnames'
 import {
   ButtonHTMLAttributes,
   ClassAttributes,
   ForwardedRef,
   forwardRef,
   HTMLAttributes,
-} from "react"
-import { IconLoader } from "ui/Icons"
+} from 'react'
+import { IconLoader } from 'ui/Icons'
 
 export interface ButtonProps
   extends HTMLAttributes<HTMLButtonElement>,
@@ -18,7 +18,7 @@ export interface ButtonProps
 const Button = forwardRef(
   (props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
     const {
-      type = "button",
+      type = 'button',
       className,
       loading,
       children,
@@ -30,10 +30,10 @@ const Button = forwardRef(
         ref={ref}
         type={type}
         className={classNames(
-          "relative bg-slate-700 px-4 py-2 font-light text-white",
-          "hover:bg-slate-800",
-          "disabled:pointer-events-none disabled:opacity-50",
-          { "pointer-events-none text-transparent opacity-50": loading },
+          'relative bg-slate-700 px-4 py-2 font-light text-white',
+          'hover:bg-slate-800',
+          'disabled:pointer-events-none disabled:opacity-50',
+          { 'pointer-events-none text-transparent opacity-50': loading },
           className
         )}
         {...otherProps}
@@ -49,5 +49,5 @@ const Button = forwardRef(
   }
 )
 
-Button.displayName = "Button"
+Button.displayName = 'Button'
 export default Button
