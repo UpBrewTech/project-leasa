@@ -3,7 +3,7 @@ import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { IconClose } from 'ui/Icons'
-import PanelLayout from 'ui/Layouts/Panel'
+import { PanelLayout } from 'ui/Layouts/Panel'
 
 const Login = () => {
   const { push, query } = useRouter()
