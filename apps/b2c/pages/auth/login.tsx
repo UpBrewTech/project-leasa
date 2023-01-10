@@ -24,7 +24,7 @@ const Login = () => {
           loading={!!query.with && query.with === 'facebook'}
           disabled={!!query.with && query.with !== 'facebook'}
           onClick={() => {
-            signIn('facebook', { callbackUrl: '/auth/login' })
+            signIn('facebook', { callbackUrl: '/' })
             push({ query: { with: 'facebook' } })
           }}
         >
@@ -36,7 +36,7 @@ const Login = () => {
           loading={!!query.with && query.with === 'google'}
           disabled={!!query.with && query.with !== 'google'}
           onClick={() => {
-            signIn('google', { callbackUrl: '/auth/login' })
+            signIn('google', { callbackUrl: '/' })
             push({ query: { with: 'google' } })
           }}
         >

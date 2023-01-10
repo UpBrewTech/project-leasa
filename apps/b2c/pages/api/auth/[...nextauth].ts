@@ -1,4 +1,3 @@
-import HasuraAdapter from 'components/HasuraAdapter'
 import jwt from 'jsonwebtoken'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth, { Awaitable, User } from 'next-auth'
@@ -8,6 +7,7 @@ import EmailProvider from 'next-auth/providers/email'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
 import { doSSRFetch } from 'utils/doSSRFetch'
+import HasuraAdapter from 'utils/HasuraAdapter'
 
 const MAX_AGE = 24 * 60 * 60 // hr * min * sec
 
@@ -20,9 +20,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       EmailProvider({
         server: process.env.EMAIL_SERVER!,
         from: process.env.EMAIL_FROM!,
-        // sendVerificationRequest: (params) => {
-        //   console.log("sendVerificationRequest", params)
-        // },
       }),
       GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -85,14 +82,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       },
     },
     callbacks: {
-      // signIn: async ({ user, account, profile, email, credentials }) => {
-      //   console.log("signIn callback")
-
-      //   return true
-      // },
       jwt: async ({ token, user }) => {
-        // console.log("jwt callback")
-
         if (user) {
           const role = user.role ? user.role : 'user'
 
@@ -112,8 +102,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         return Promise.resolve(token)
       },
       session: async ({ session, token }) => {
-        // console.log("session callback")
-
         const encodedToken = jwt.sign(token, process.env.NEXTAUTH_SECRET!, {
           algorithm: 'HS256',
         })
@@ -138,7 +126,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       signIn: '/',
       signOut: '/',
       error: '404',
-      // verifyRequest: "/auth/verify-request",
     },
   })
 }
@@ -163,17 +150,6 @@ const GET_USER_WITH_CREDENTIALS = `
       email
       image
       role
-    }
-  }
-`
-
-const GET_ACCOUNT = `
-  query GetAccount($id: uuid = "") {
-    account: accounts_by_pk(id: $id) {
-      account_name
-      account_email
-      account_phone
-      id
     }
   }
 `

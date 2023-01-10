@@ -6,13 +6,11 @@ import {
   AdapterUser,
   VerificationToken,
 } from 'next-auth/adapters'
-import { doSSRFetch } from 'utils/doSSRFetch'
+import { doSSRFetch } from './doSSRFetch'
 
 const HasuraAdapter = (): Adapter<true> => {
   return {
     createUser: async (user: Omit<AdapterUser, 'id'>) => {
-      // console.debug("createUser")
-
       const data = await doSSRFetch({
         query: CREATE_USER,
         variables: { object: { ...user } },
@@ -21,8 +19,6 @@ const HasuraAdapter = (): Adapter<true> => {
       return data.user
     },
     getUser: async (id: string) => {
-      // console.debug("getUser")
-
       const data = await doSSRFetch({
         query: GET_USER,
         variables: { id },
@@ -31,8 +27,6 @@ const HasuraAdapter = (): Adapter<true> => {
       return data.user
     },
     getUserByEmail: async (email: string) => {
-      // console.debug("getUserByEmail")
-
       const data = await doSSRFetch({
         query: GET_USERS,
         variables: { where: { email: { _eq: email } } },
@@ -44,8 +38,6 @@ const HasuraAdapter = (): Adapter<true> => {
       provider,
       providerAccountId,
     }: Pick<AdapterAccount, 'provider' | 'providerAccountId'>) => {
-      // console.debug("getUserByAccount")
-
       const data = await doSSRFetch({
         query: GET_USERS,
         variables: {
@@ -61,8 +53,6 @@ const HasuraAdapter = (): Adapter<true> => {
       return data.users.length ? data.users[0] : null
     },
     updateUser: async ({ id, ...user }: Partial<AdapterUser>) => {
-      // console.debug("updateUser")
-
       const data = await doSSRFetch({
         query: UPDATE_USER,
         variables: { id, _set: { ...user } },
@@ -71,8 +61,6 @@ const HasuraAdapter = (): Adapter<true> => {
       return data.user as AdapterUser
     },
     linkAccount: async (account: AdapterAccount) => {
-      // console.debug("linkAccount")
-
       const data = await doSSRFetch({
         query: CREATE_USER_PROVIDER,
         variables: { object: { ...account } },
@@ -82,18 +70,12 @@ const HasuraAdapter = (): Adapter<true> => {
     },
     /** Creates a session for the user and returns it. */
     createSession: async (session) => {
-      // console.debug("createSession")
-
       return session
     },
     getSessionAndUser: async () => {
-      // console.debug("getSessionAndUser")
-
       return null
     },
     updateSession: async () => {
-      // console.debug("updateSession")
-
       return null
     },
     /**
@@ -102,8 +84,6 @@ const HasuraAdapter = (): Adapter<true> => {
      * that is being deleted for logging purposes.
      */
     deleteSession: async () => {
-      // console.debug("deleteSession")
-
       return null
     },
     createVerificationToken: async ({
@@ -111,8 +91,6 @@ const HasuraAdapter = (): Adapter<true> => {
       identifier,
       expires,
     }: VerificationToken) => {
-      // console.debug("createVerificationToken")
-
       const data = await doSSRFetch({
         query: CREATE_USER_TOKEN,
         variables: { object: { token, identifier, expires } },
@@ -131,8 +109,6 @@ const HasuraAdapter = (): Adapter<true> => {
       identifier: string
       token: string
     }) => {
-      // console.debug("useVerificationToken")
-
       const data = await doSSRFetch({
         query: DELETE_USER_TOKEN,
         variables: { token, identifier },
