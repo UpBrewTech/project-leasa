@@ -183,25 +183,21 @@ importers:
 
   packages/utils:
     specifiers:
-      '@types/lodash.indexof': ^4.0.7
       '@types/lodash.template': ^4.5.1
       '@types/node': 18.11.3
       '@types/react': 18.0.21
       '@types/react-dom': 18.0.6
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
-      lodash.indexof: ^4.0.5
       lodash.template: ^4.5.0
       next-auth: ^4.18.8
       react: 18.2.0
       tsconfig: workspace:*
       typescript: 4.9.4
     dependencies:
-      lodash.indexof: 4.0.5
       lodash.template: 4.5.0
       next-auth: 4.18.8_r5sq4deac3rmm2d5onhwvomqve
     devDependencies:
-      '@types/lodash.indexof': 4.0.7
       '@types/lodash.template': 4.5.1
       '@types/node': 18.11.3
       '@types/react': 18.0.21
@@ -691,12 +687,6 @@ packages:
     resolution: {integrity: sha512-mM4TkDpA9oixqg1Fv2vVpOFyIVLJjm5x4k0V+K/rEsizfjD7Tk7LKk3GTtbB7KCfP0FEHQtsZqFxYA0+sijNVg==}
     dependencies:
       '@types/node': 18.11.3
-    dev: true
-
-  /@types/lodash.indexof/4.0.7:
-    resolution: {integrity: sha512-yXJkKeJ/25z1y9IVLewC4mn3IfcpJvN3mEGLbjxCZ4GKwqFHMmFxI0DjpCBrNjhA9ON935/4TSHYAKw6Kzb3hQ==}
-    dependencies:
-      '@types/lodash': 4.14.191
     dev: true
 
   /@types/lodash.template/4.5.1:
@@ -2198,10 +2188,6 @@ packages:
 
   /lodash._reinterpolate/3.0.0:
     resolution: {integrity: sha512-xYHt68QRoYGjeeM/XOE1uJtvXQAgvszfBhjV4yvsQH0u2i9I6cI6c6/eG4Hh3UAOVn0y/xAXwmTzEay49Q//HA==}
-    dev: false
-
-  /lodash.indexof/4.0.5:
-    resolution: {integrity: sha512-t9wLWMQsawdVmf6/IcAgVGqAJkNzYVcn4BHYZKTPW//l7N5Oq7Bq138BaVk19agcsPZePcidSgTTw4NqS1nUAw==}
     dev: false
 
   /lodash.merge/4.6.2:
