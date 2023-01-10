@@ -1,10 +1,10 @@
-import { SVGProps } from "react"
+import { SVGProps } from 'react'
 
 const GLOBAL_PROPS = {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "1em",
-  height: "1em",
-  strokeWidth: "1.5",
+  xmlns: 'http://www.w3.org/2000/svg',
+  width: '1em',
+  height: '1em',
+  strokeWidth: '1.5',
 }
 
 export const IconArrow = (props: SVGProps<SVGSVGElement>) => (

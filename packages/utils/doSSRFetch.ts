@@ -8,9 +8,9 @@ interface Options {
 
 export const doSSRFetch = async (options: Options) => {
   const response = await fetch(url, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "x-hasura-admin-secret": hasuraSecret,
+      'x-hasura-admin-secret': hasuraSecret,
     },
     body: JSON.stringify(options),
   })

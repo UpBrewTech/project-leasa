@@ -3,9 +3,9 @@ export const formatCurrency = (value?: number) => {
     return undefined
   }
 
-  const result = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "PHP",
+  const result = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'PHP',
     maximumFractionDigits: 2,
     minimumFractionDigits: 2,
   }).format(value)
