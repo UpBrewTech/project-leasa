@@ -6,7 +6,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import EmailProvider from 'next-auth/providers/email'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
-import { doSSRFetch } from 'utils/doSSRFetch'
+import { asyncSSRFetch } from 'utils/asyncSSRFetch'
 import HasuraAdapter from 'utils/HasuraAdapter'
 
 const MAX_AGE = 24 * 60 * 60 // hr * min * sec
@@ -46,7 +46,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         authorize: async (credentials) => {
           const { username, password } = credentials || {}
 
-          const data = await doSSRFetch({
+          const data = await asyncSSRFetch<{ authenticate: User }>({
             query: GET_USER_WITH_CREDENTIALS,
             variables: {
               username,

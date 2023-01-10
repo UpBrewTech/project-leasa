@@ -6,12 +6,12 @@ import {
   AdapterUser,
   VerificationToken,
 } from 'next-auth/adapters'
-import { doSSRFetch } from './doSSRFetch'
+import { asyncSSRFetch } from './asyncSSRFetch'
 
 const HasuraAdapter = (): Adapter<true> => {
   return {
     createUser: async (user: Omit<AdapterUser, 'id'>) => {
-      const data = await doSSRFetch({
+      const data = await asyncSSRFetch<{ user: AdapterUser }>({
         query: CREATE_USER,
         variables: { object: { ...user } },
       })
@@ -19,7 +19,7 @@ const HasuraAdapter = (): Adapter<true> => {
       return data.user
     },
     getUser: async (id: string) => {
-      const data = await doSSRFetch({
+      const data = await asyncSSRFetch<{ user: AdapterUser | null }>({
         query: GET_USER,
         variables: { id },
       })
@@ -27,7 +27,7 @@ const HasuraAdapter = (): Adapter<true> => {
       return data.user
     },
     getUserByEmail: async (email: string) => {
-      const data = await doSSRFetch({
+      const data = await asyncSSRFetch<{ users: AdapterUser[] }>({
         query: GET_USERS,
         variables: { where: { email: { _eq: email } } },
       })
@@ -38,7 +38,7 @@ const HasuraAdapter = (): Adapter<true> => {
       provider,
       providerAccountId,
     }: Pick<AdapterAccount, 'provider' | 'providerAccountId'>) => {
-      const data = await doSSRFetch({
+      const data = await asyncSSRFetch<{ users: AdapterUser[] }>({
         query: GET_USERS,
         variables: {
           where: {
@@ -53,7 +53,7 @@ const HasuraAdapter = (): Adapter<true> => {
       return data.users.length ? data.users[0] : null
     },
     updateUser: async ({ id, ...user }: Partial<AdapterUser>) => {
-      const data = await doSSRFetch({
+      const data = await asyncSSRFetch<{ user: AdapterUser }>({
         query: UPDATE_USER,
         variables: { id, _set: { ...user } },
       })
@@ -61,7 +61,7 @@ const HasuraAdapter = (): Adapter<true> => {
       return data.user as AdapterUser
     },
     linkAccount: async (account: AdapterAccount) => {
-      const data = await doSSRFetch({
+      const data = await asyncSSRFetch<{ provider: AdapterAccount }>({
         query: CREATE_USER_PROVIDER,
         variables: { object: { ...account } },
       })
@@ -91,7 +91,7 @@ const HasuraAdapter = (): Adapter<true> => {
       identifier,
       expires,
     }: VerificationToken) => {
-      const data = await doSSRFetch({
+      const data = await asyncSSRFetch<{ user_token: VerificationToken }>({
         query: CREATE_USER_TOKEN,
         variables: { object: { token, identifier, expires } },
       })
@@ -109,13 +109,15 @@ const HasuraAdapter = (): Adapter<true> => {
       identifier: string
       token: string
     }) => {
-      const data = await doSSRFetch({
+      const data = await asyncSSRFetch<{
+        user_token: { returning: VerificationToken[] }
+      }>({
         query: DELETE_USER_TOKEN,
         variables: { token, identifier },
       })
 
-      const verificationToken = data.delete_user_tokens.returning.length
-        ? data.delete_user_tokens.returning[0]
+      const verificationToken = data.user_token.returning.length
+        ? data.user_token.returning[0]
         : null
 
       return verificationToken
@@ -216,7 +218,7 @@ const CREATE_USER_TOKEN = `
 
 const DELETE_USER_TOKEN = `
   mutation DeleteUserToken($token: String = "", $identifier: String = "") {
-    delete_user_tokens(where: {token: {_eq: $token}, identifier: {_eq: $identifier}}) {
+    user_token: delete_user_tokens(where: {token: {_eq: $token}, identifier: {_eq: $identifier}}) {
       returning {
         token
         identifier

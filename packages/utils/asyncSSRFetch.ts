@@ -6,7 +6,7 @@ interface Options {
   variables?: any
 }
 
-export const doSSRFetch = async (options: Options) => {
+export const asyncSSRFetch = async <T = {}>(options: Options): Promise<T> => {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -17,5 +17,5 @@ export const doSSRFetch = async (options: Options) => {
 
   const { data } = await response.json()
 
-  return await data
+  return (await data) as T
 }
