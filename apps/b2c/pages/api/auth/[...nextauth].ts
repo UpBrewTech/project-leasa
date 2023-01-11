@@ -66,7 +66,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       encode: async ({ token, secret, maxAge }) => {
         token = {
           ...token,
-          exp: getExp({ exp: token?.exp, maxAge }),
+          exp: getExpiry({ exp: token?.exp, maxAge }),
         } as JWT
 
         const encodedToken = jwt.sign(token, secret, { algorithm: 'HS256' })
@@ -132,12 +132,12 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   })
 }
 
-interface GetExpProps {
+interface GetExpiryProps {
   exp?: number
   maxAge?: number
 }
 
-const getExp = ({ exp, maxAge = MAX_AGE }: GetExpProps) => {
+const getExpiry = ({ exp, maxAge = MAX_AGE }: GetExpiryProps) => {
   const now = Math.floor(Date.now() / 1000)
   if (!exp) return now + maxAge
 
