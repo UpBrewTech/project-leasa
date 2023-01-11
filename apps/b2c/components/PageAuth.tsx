@@ -2,7 +2,6 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { REDIRECT_MAP } from 'pages/auth'
 import { PropsWithChildren } from 'react'
-import inArray from 'utils/inArray'
 
 type Props = PropsWithChildren<{
   allowedRoles?: Role[]
@@ -15,7 +14,7 @@ const PageAuth = ({ allowedRoles, children }: Props) => {
 
   if (status === 'loading') return null
 
-  if (allowedRoles && !inArray(role, allowedRoles)) {
+  if (allowedRoles && !allowedRoles.includes(role)) {
     push({
       pathname: REDIRECT_MAP[role],
       ...(status === 'unauthenticated' && { query: { from: asPath } }),
