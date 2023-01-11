@@ -83,23 +83,22 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     },
     callbacks: {
       jwt: async ({ token, user }) => {
-        if (user) {
-          const role = user.role ? user.role : 'user'
+        // on subsequent calls
+        if (!user) return Promise.resolve(token)
 
-          token = {
-            ...token,
-            'https://hasura.io/jwt/claims': {
-              'x-hasura-allowed-roles': [role],
-              'x-hasura-default-role': role,
-              'x-hasura-role': role,
-              ...(role === 'user'
-                ? { 'x-hasura-user-id': token.sub }
-                : { 'x-hasura-account-id': token.sub }),
-            },
-          }
+        // on successful signIn
+        const role = user.role ? user.role : 'user'
+        const userToken = {
+          ...token,
+          'https://hasura.io/jwt/claims': {
+            'x-hasura-allowed-roles': [role],
+            'x-hasura-default-role': role,
+            'x-hasura-role': role,
+            'x-hasura-user-id': token.sub,
+          },
         }
 
-        return Promise.resolve(token)
+        return Promise.resolve(userToken)
       },
       session: async ({ session, token }) => {
         const encodedToken = jwt.sign(token, process.env.NEXTAUTH_SECRET!, {
