@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { NextApiRequest, NextApiResponse } from 'next'
-import NextAuth, { Awaitable, User } from 'next-auth'
+import NextAuth, { Awaitable, Session, User } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import EmailProvider from 'next-auth/providers/email'
@@ -105,16 +105,19 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
           algorithm: 'HS256',
         })
 
-        session.user = {
-          id: token.sub,
-          name: token.name,
-          email: token.email,
-          role: token['https://hasura.io/jwt/claims']['x-hasura-role'],
-          image: token.picture,
-        } as User
-        session.token = encodedToken
+        const sessionResponse: Session = {
+          ...session,
+          user: {
+            id: token.sub,
+            name: token.name,
+            email: token.email,
+            role: token['https://hasura.io/jwt/claims']['x-hasura-role'],
+            image: token.picture,
+          },
+          token: encodedToken,
+        }
 
-        return Promise.resolve(session)
+        return Promise.resolve(sessionResponse)
       },
     },
     session: {
