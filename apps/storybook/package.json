@@ -1,0 +1,45 @@
+{
+  "name": "storybook",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"yarn:watch:*\"",
+    "storybook": "concurrently \"yarn:watch:*\"",
+    "build-storybook": "concurrently \"yarn:build:*\"",
+    "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css",
+    "build:storybook": "storybook build",
+    "watch:css": "npx tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css --watch",
+    "watch:storybook": "start-storybook dev -p 6006"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-essentials": "^6.5.15",
+    "@storybook/addon-interactions": "^6.5.15",
+    "@storybook/addon-links": "^6.5.15",
+    "@storybook/builder-vite": "^0.2.7",
+    "@storybook/react": "^6.5.15",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "@vitejs/plugin-react": "^3.0.0",
+    "babel-loader": "^8.3.0",
+    "concurrently": "^7.6.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "twconfig": "workspace:*",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0"
+  }
+}
