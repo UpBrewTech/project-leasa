@@ -64,12 +64,12 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     jwt: {
       maxAge: MAX_AGE,
       encode: async ({ token, secret, maxAge }) => {
-        token = {
+        const jwtToken = {
           ...token,
           exp: getExpiry({ exp: token?.exp, maxAge }),
-        } as JWT
+        }
 
-        const encodedToken = jwt.sign(token, secret, { algorithm: 'HS256' })
+        const encodedToken = jwt.sign(jwtToken, secret, { algorithm: 'HS256' })
         return Promise.resolve(encodedToken)
       },
       decode: async ({ token, secret }) => {

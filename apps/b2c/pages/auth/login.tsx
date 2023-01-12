@@ -1,12 +1,12 @@
 import Button from 'components/Button'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { IconClose } from 'ui/Icons'
 import { PanelLayout } from 'ui/Layouts/Panel'
+import useToggle from 'utils/useToggle'
 
 const Login = () => {
-  const { push, query } = useRouter()
+  const { state: loading, toggle: toggleLoading } = useToggle()
 
   return (
     <div className="w-full bg-white p-8 shadow-sm sm:w-96">
@@ -21,11 +21,10 @@ const Login = () => {
         <Button
           type="submit"
           className="w-full hidden"
-          loading={!!query.with && query.with === 'facebook'}
-          disabled={!!query.with && query.with !== 'facebook'}
+          disabled={loading}
           onClick={() => {
-            signIn('facebook', { callbackUrl: '/' })
-            push({ query: { with: 'facebook' } })
+            toggleLoading()
+            signIn('facebook', { redirect: false })
           }}
         >
           Login with Facebook
@@ -33,11 +32,10 @@ const Login = () => {
         <Button
           type="submit"
           className="w-full"
-          loading={!!query.with && query.with === 'google'}
-          disabled={!!query.with && query.with !== 'google'}
+          disabled={loading}
           onClick={() => {
-            signIn('google', { callbackUrl: '/' })
-            push({ query: { with: 'google' } })
+            toggleLoading()
+            signIn('google', { redirect: false })
           }}
         >
           Login with Google
