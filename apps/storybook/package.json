@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"yarn:watch:*\"",
-    "storybook": "concurrently \"yarn:watch:*\"",
-    "build-storybook": "concurrently \"yarn:build:*\"",
+    "dev": "concurrently \"pnpm:watch:*\"",
+    "storybook": "concurrently \"pnpm:watch:*\"",
+    "build-storybook": "concurrently \"pnpm:build:*\"",
     "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css",
     "build:storybook": "storybook build",
     "watch:css": "npx tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css --watch",
