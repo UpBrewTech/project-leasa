@@ -4,8 +4,6 @@ import 'next-auth/jwt'
 declare module 'next-auth/jwt' {
   interface JWT {
     sub: string
-    name: string
-    email: string
     exp: number
     'https://hasura.io/jwt/claims': HasuraClaim
   }

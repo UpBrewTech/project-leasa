@@ -1,4 +1,4 @@
-export const formatCurrency = (value?: number) => {
+export const formatCurrencyPHP = (value?: number) => {
   if (!value) {
     return undefined
   }

@@ -2,8 +2,8 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 export const REDIRECT_MAP: Record<Role, string> = {
-  user: '/',
-  public: '/',
+  USER: '/',
+  PUBLIC: '/',
 }
 
 const Auth = () => {

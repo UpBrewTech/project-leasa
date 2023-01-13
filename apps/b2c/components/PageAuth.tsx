@@ -10,7 +10,7 @@ type Props = PropsWithChildren<{
 const PageAuth = ({ allowedRoles, children }: Props) => {
   const { push, asPath } = useRouter()
   const { data, status } = useSession()
-  const role = data?.user.role ? data?.user.role : 'public'
+  const role = data?.user.role ? data?.user.role : 'PUBLIC'
 
   if (status === 'loading') return null
 

@@ -1,1 +1,1 @@
-type Role = 'user' | 'public'
+type Role = 'USER' | 'PUBLIC'
