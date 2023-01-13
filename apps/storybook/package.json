@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"pnpm:watch:*\"",
     "storybook": "concurrently \"pnpm:watch:*\"",
     "build-storybook": "concurrently \"pnpm:build:*\"",
     "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css",
