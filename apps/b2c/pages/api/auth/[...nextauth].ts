@@ -66,7 +66,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       encode: async ({ token, secret, maxAge }) => {
         const jwtToken = {
           ...token,
-          exp: getExpiry({ exp: token?.exp, maxAge }),
+          exp: setTokenExpiration({ exp: token?.exp, maxAge }),
         }
 
         const encodedToken = jwt.sign(jwtToken, secret, { algorithm: 'HS256' })
@@ -132,16 +132,17 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   })
 }
 
-interface GetExpiryProps {
+const setTokenExpiration = ({
+  exp,
+  maxAge = MAX_AGE,
+}: {
   exp?: number
   maxAge?: number
-}
-
-const getExpiry = ({ exp, maxAge = MAX_AGE }: GetExpiryProps) => {
+}) => {
   const now = Math.floor(Date.now() / 1000)
   if (!exp) return now + maxAge
 
-  return exp && exp > now ? now + maxAge : exp
+  return exp > now ? now + maxAge : exp
 }
 
 const GET_USER_WITH_CREDENTIALS = `
