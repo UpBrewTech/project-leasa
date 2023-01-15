@@ -56,7 +56,7 @@ export const Pagination = ({
       <button
         onClick={createPageOnClickHandler(1)}
         className={classnames(
-          'px-4 py-2',
+          'px-4',
           'text-primary-600',
           'border border-primary-300',
           'relative inline-flex items-center',
@@ -73,7 +73,7 @@ export const Pagination = ({
       pages.push(
         <button
           className={classnames(
-            'px-4 py-2',
+            'px-sm',
             'text-primary-600',
             'border border-primary-300',
             'relative inline-flex items-center'
@@ -93,7 +93,7 @@ export const Pagination = ({
         key={buttonPage}
         onClick={createPageOnClickHandler(buttonPage)}
         className={classnames(
-          'px-4 py-2',
+          'px-sm',
           'text-primary-600',
           'border border-primary-300',
           'relative inline-flex items-center',
@@ -113,7 +113,7 @@ export const Pagination = ({
       pages.push(
         <button
           className={classnames(
-            'px-4 py-2',
+            'px-sm',
             'text-primary-600',
             'border border-primary-300',
             'relative inline-flex items-center'
@@ -128,7 +128,7 @@ export const Pagination = ({
       <button
         onClick={createPageOnClickHandler(totalPageCount)}
         className={classnames(
-          'px-4 py-2',
+          'px-sm',
           'text-primary-600',
           'border border-primary-300',
           'relative inline-flex items-center',
@@ -148,14 +148,14 @@ export const Pagination = ({
       <div className="flex items-center justify-between">
         <div className="flex flex-1 justify-between sm:hidden">
           <button
-            className="relative inline-flex items-center rounded-md border border-primary-300 px-4 py-2 text-primary-700 hover:bg-primary-50"
+            className="relative inline-flex items-center rounded-md border border-primary-300 px-sm text-primary-700 hover:bg-primary-50"
             onClick={createPageOnClickHandler(activePage - 1)}
             disabled={!hasPrevPage}
           >
             <Typography variant="label-small">Previous</Typography>
           </button>
           <button
-            className="relative ml-3 inline-flex items-center rounded-md border border-primary-300 px-4 py-2 text-primary-700 hover:bg-primary-50"
+            className="relative ml-3 inline-flex items-center rounded-md border border-primary-300 px-sm text-primary-700 hover:bg-primary-50"
             onClick={createPageOnClickHandler(activePage + 1)}
             disabled={!hasNextPage}
           >
@@ -181,7 +181,7 @@ export const Pagination = ({
             >
               <button
                 className={classnames(
-                  'px-2 py-2',
+                  'px-2 ',
                   'border border-primary-300 rounded-l-md',
                   'relative inline-flex items-center',
                   hasPrevPage
@@ -212,7 +212,7 @@ export const Pagination = ({
 
               <button
                 className={classnames(
-                  'px-2 py-2',
+                  'px-2 ',
                   'border border-primary-300 rounded-r-md',
                   'relative inline-flex items-center',
                   hasNextPage

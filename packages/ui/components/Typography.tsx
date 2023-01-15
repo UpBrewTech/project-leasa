@@ -30,16 +30,16 @@ export const Typography = <T extends React.ElementType = 'span'>({
   const Component = As || 'span'
   return (
     <Component
-      className={classnames(className, {
-        'text-5xl font-medium leading-tight my-md': variant === 'title-page',
-        'text-xl font-medium leading-7 my-md': variant === 'title-section',
-        'text-base font-bold leading-6 my-md': variant === 'title-subsection',
-        'text-base font-normal leading-6 my-sm': variant === 'paragraph-large',
-        'text-sm font-normal leading-6 my-st': variant === 'paragraph-medium',
-        'text-xs font-normal leading-5 my-st': variant === 'paragraph-small',
-        'text-base font-medium leading-6 my-st': variant === 'label-large',
-        'text-sm font-medium leading-5 my-sm': variant === 'label-medium',
-        'text-xs font-medium leading-4 my-xs': variant === 'label-small',
+      className={classnames('font-inter', className, {
+        'text-5xl font-medium leading-tight': variant === 'title-page',
+        'text-xl font-medium leading-7': variant === 'title-section',
+        'text-base font-bold leading-6': variant === 'title-subsection',
+        'text-base font-normal leading-6': variant === 'paragraph-large',
+        'text-sm font-normal leading-6': variant === 'paragraph-medium',
+        'text-xs font-normal leading-5': variant === 'paragraph-small',
+        'text-base font-medium leading-6': variant === 'label-large',
+        'text-sm font-medium leading-5': variant === 'label-medium',
+        'text-xs font-medium leading-4': variant === 'label-small',
       })}
       {...props}
     />

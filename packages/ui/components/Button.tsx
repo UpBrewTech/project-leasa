@@ -29,7 +29,7 @@ export const Button = ({
       className={classnames(
         'transition-all duration-200 ease-in-out',
         'hover:bg-opacity-75 hover:text-opacity-75 hover:border-opacity-75',
-        'cursor-pointer rounded-lg border leading-none inline-block',
+        'cursor-pointer rounded-standard border leading-none inline-block',
         {
           'px-sm py-xs text-sm': size === 'small',
           'px-md py-st text-base': size === 'regular',

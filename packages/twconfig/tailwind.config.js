@@ -14,6 +14,9 @@ module.exports = {
       xl: '1440px',
     },
     extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
       colors: {
         primary: {
           50: '#f4f3ff',
@@ -64,7 +67,7 @@ module.exports = {
         xxl: '80px',
       },
       borderRadius: {
-        '4xl': '2rem',
+        standard: '4px',
       },
     },
   },
