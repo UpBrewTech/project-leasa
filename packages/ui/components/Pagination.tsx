@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import React, { useState } from 'react'
+import { Typography } from './Typography'
 
 interface PaginationMeta {
   total: number
@@ -56,8 +57,7 @@ export const Pagination = ({
         onClick={createPageOnClickHandler(1)}
         className={classnames(
           'px-4 py-2',
-          'text-sm font-medium text-primary-600',
-          'bg-white',
+          'text-primary-600',
           'border border-primary-300',
           'relative inline-flex items-center',
           'hover:bg-primary-50 focus:z-20',
@@ -66,7 +66,7 @@ export const Pagination = ({
           }
         )}
       >
-        1
+        <Typography variant="label-small">1</Typography>
       </button>
     )
     if (startingPage > 2) {
@@ -74,14 +74,13 @@ export const Pagination = ({
         <button
           className={classnames(
             'px-4 py-2',
-            'text-sm font-medium text-primary-600',
-            'bg-white',
+            'text-primary-600',
             'border border-primary-300',
             'relative inline-flex items-center'
           )}
           disabled
         >
-          ...
+          <Typography variant="label-small">...</Typography>
         </button>
       )
     }
@@ -95,8 +94,7 @@ export const Pagination = ({
         onClick={createPageOnClickHandler(buttonPage)}
         className={classnames(
           'px-4 py-2',
-          'text-sm font-medium text-primary-600',
-          'bg-white',
+          'text-primary-600',
           'border border-primary-300',
           'relative inline-flex items-center',
           'hover:bg-primary-50 focus:z-20',
@@ -105,7 +103,7 @@ export const Pagination = ({
           }
         )}
       >
-        {buttonPage}
+        <Typography variant="label-small">{buttonPage}</Typography>
       </button>
     )
   }
@@ -116,14 +114,13 @@ export const Pagination = ({
         <button
           className={classnames(
             'px-4 py-2',
-            'text-sm font-medium text-primary-600',
-            'bg-white',
+            'text-primary-600',
             'border border-primary-300',
             'relative inline-flex items-center'
           )}
           disabled
         >
-          ...
+          <Typography variant="label-small">...</Typography>
         </button>
       )
     }
@@ -132,8 +129,7 @@ export const Pagination = ({
         onClick={createPageOnClickHandler(totalPageCount)}
         className={classnames(
           'px-4 py-2',
-          'text-sm font-medium text-primary-600',
-          'bg-white',
+          'text-primary-600',
           'border border-primary-300',
           'relative inline-flex items-center',
           'hover:bg-primary-50 focus:z-20',
@@ -142,28 +138,28 @@ export const Pagination = ({
           }
         )}
       >
-        {totalPageCount}
+        <Typography variant="label-small">{totalPageCount}</Typography>
       </button>
     )
   }
 
   return (
     <div {...otherProps}>
-      <div className="flex items-center justify-between border-t border-primary-100 bg-white py-3">
+      <div className="flex items-center justify-between">
         <div className="flex flex-1 justify-between sm:hidden">
           <button
-            className="relative inline-flex items-center rounded-md border border-primary-300 bg-white px-4 py-2 text-sm font-medium text-primary-700 hover:bg-primary-50"
+            className="relative inline-flex items-center rounded-md border border-primary-300 px-4 py-2 text-primary-700 hover:bg-primary-50"
             onClick={createPageOnClickHandler(activePage - 1)}
             disabled={!hasPrevPage}
           >
-            Previous
+            <Typography variant="label-small">Previous</Typography>
           </button>
           <button
-            className="relative ml-3 inline-flex items-center rounded-md border border-primary-300 bg-white px-4 py-2 text-sm font-medium text-primary-700 hover:bg-primary-50"
+            className="relative ml-3 inline-flex items-center rounded-md border border-primary-300 px-4 py-2 text-primary-700 hover:bg-primary-50"
             onClick={createPageOnClickHandler(activePage + 1)}
             disabled={!hasNextPage}
           >
-            Next
+            <Typography variant="label-small">Next</Typography>
           </button>
         </div>
         <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
@@ -186,8 +182,6 @@ export const Pagination = ({
               <button
                 className={classnames(
                   'px-2 py-2',
-                  'text-sm font-medium',
-                  'bg-white',
                   'border border-primary-300 rounded-l-md',
                   'relative inline-flex items-center',
                   hasPrevPage
@@ -197,28 +191,28 @@ export const Pagination = ({
                 disabled={!hasPrevPage}
                 onClick={createPageOnClickHandler(activePage - 1)}
               >
-                <span className="sr-only">Previous</span>
-                <svg
-                  className="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                <Typography variant="label-small">
+                  <span className="sr-only">Previous</span>
+                  <svg
+                    className="h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </Typography>
               </button>
               {pages}
 
               <button
                 className={classnames(
                   'px-2 py-2',
-                  'text-sm font-medium',
-                  'bg-white',
                   'border border-primary-300 rounded-r-md',
                   'relative inline-flex items-center',
                   hasNextPage
@@ -228,20 +222,22 @@ export const Pagination = ({
                 disabled={!hasNextPage}
                 onClick={createPageOnClickHandler(activePage + 1)}
               >
-                <span className="sr-only">Next</span>
-                <svg
-                  className="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                <Typography variant="label-small">
+                  <span className="sr-only">Next</span>
+                  <svg
+                    className="h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </Typography>
               </button>
             </nav>
           </div>

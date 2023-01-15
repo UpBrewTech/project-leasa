@@ -1,13 +1,13 @@
 import classnames from 'classnames'
 
-type Variant = 'primary' | 'secondary' | 'text'
+export type ButtonVariant = 'primary' | 'secondary' | 'text'
 
 export interface ButtonProps
   extends React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
-  variant?: Variant
+  variant?: ButtonVariant
   danger?: boolean
   size?: 'small' | 'regular' | 'large'
   wide?: boolean
@@ -28,12 +28,12 @@ export const Button = ({
       type="button"
       className={classnames(
         'transition-all duration-200 ease-in-out',
-        'hover:bg-opacity-70 hover:text-opacity-70 hover:border-opacity-70',
-        'cursor-pointer rounded-full border leading-none inline-block',
+        'hover:bg-opacity-75 hover:text-opacity-75 hover:border-opacity-75',
+        'cursor-pointer rounded-lg border leading-none inline-block',
         {
-          'px-2 py-1 text-sm': size === 'small',
-          'px-4 py-2 text-base': size === 'regular',
-          'px-8 py-4 text-lg': size === 'large',
+          'px-sm py-xs text-sm': size === 'small',
+          'px-md py-st text-base': size === 'regular',
+          'px-lg py-sm text-lg': size === 'large',
           'w-full': wide,
         },
         danger

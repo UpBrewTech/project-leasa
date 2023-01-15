@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: [
     '../../packages/ui/**/*.{js,ts,jsx,tsx}',
@@ -51,8 +53,15 @@ module.exports = {
         },
       },
       spacing: {
-        128: '32rem',
-        144: '36rem',
+        xxxs: '2px',
+        xxs: '4px',
+        xs: '8px',
+        st: '12px',
+        sm: '16px',
+        md: '24px',
+        lg: '32px',
+        xl: '48px',
+        xxl: '80px',
       },
       borderRadius: {
         '4xl': '2rem',
