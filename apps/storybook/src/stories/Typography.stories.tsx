@@ -107,7 +107,7 @@ export const TitleSubSection: ComponentStory<typeof Typography> = () => (
   </Typography>
 )
 
-export const Labellarge: ComponentStory<typeof Typography> = () => (
+export const LabelLarge: ComponentStory<typeof Typography> = () => (
   <Typography variant="label-large">
     The quick brown fox jumps over the lazy dog
   </Typography>
