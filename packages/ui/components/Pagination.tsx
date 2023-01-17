@@ -73,7 +73,7 @@ export const Pagination = ({
       pages.push(
         <button
           className={classnames(
-            'px-sm',
+            'px-sm py-xs',
             'text-purple-600',
             'border border-purple-300',
             'relative inline-flex items-center'
@@ -93,7 +93,7 @@ export const Pagination = ({
         key={buttonPage}
         onClick={createPageOnClickHandler(buttonPage)}
         className={classnames(
-          'px-sm',
+          'px-sm py-xs',
           'text-purple-600',
           'border border-purple-300',
           'relative inline-flex items-center',
@@ -113,7 +113,7 @@ export const Pagination = ({
       pages.push(
         <button
           className={classnames(
-            'px-sm',
+            'px-sm py-xs',
             'text-purple-600',
             'border border-purple-300',
             'relative inline-flex items-center'
@@ -128,7 +128,7 @@ export const Pagination = ({
       <button
         onClick={createPageOnClickHandler(totalPageCount)}
         className={classnames(
-          'px-sm',
+          'px-sm py-xs',
           'text-purple-600',
           'border border-purple-300',
           'relative inline-flex items-center',
@@ -148,14 +148,14 @@ export const Pagination = ({
       <div className="flex items-center justify-between">
         <div className="flex flex-1 justify-between sm:hidden">
           <button
-            className="px-sm relative inline-flex items-center rounded-md border border-purple-300 text-purple-700 hover:bg-purple-50"
+            className="px-sm py-xs relative inline-flex items-center rounded-md border border-purple-300 text-purple-700 hover:bg-purple-50"
             onClick={createPageOnClickHandler(activePage - 1)}
             disabled={!hasPrevPage}
           >
             <Typography variant="label-small">Previous</Typography>
           </button>
           <button
-            className="px-sm relative ml-3 inline-flex items-center rounded-md border border-purple-300 text-purple-700 hover:bg-purple-50"
+            className="px-sm py-xs relative ml-3 inline-flex items-center rounded-md border border-purple-300 text-purple-700 hover:bg-purple-50"
             onClick={createPageOnClickHandler(activePage + 1)}
             disabled={!hasNextPage}
           >
