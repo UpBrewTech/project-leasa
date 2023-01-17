@@ -1,5 +1,12 @@
 module.exports = {
-  extends: ['next', 'turbo', 'prettier'],
+  extends: [
+    'next',
+    'turbo',
+    'prettier',
+    'next/core-web-vitals',
+    'plugin:tailwindcss/recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
   rules: {
     '@next/next/no-html-link-for-pages': 'off',
     'react/jsx-key': 'off',
@@ -9,6 +16,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': [0],
     '@typescript-eslint/no-non-null-assertion': [0],
     '@typescript-eslint/ban-types': [0],
+    'tailwindcss/no-custom-classname': [0],
   },
   parserOptions: {
     babelOptions: {
