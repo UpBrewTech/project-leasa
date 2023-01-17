@@ -1,39 +1,93 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { Button } from 'ui/components/Button'
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Example/Button',
   component: Button,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    backgroundColor: { control: 'color' },
+  parameters: {
+    previewTabs: {
+      canvas: {
+        hidden: true,
+      },
+    },
+    viewMode: 'docs',
   },
 } as ComponentMeta<typeof Button>
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
+const Template: ComponentStory<typeof Button> = (args) => (
+  <Button wide={false} {...args} />
+)
 
-export const Primary = Template.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-  primary: true,
-  label: 'Button',
+const defaultProps = {
+  children: 'Button',
+  danger: false,
 }
 
-export const Secondary = Template.bind({})
-Secondary.args = {
-  label: 'Button',
+export const Default = Template.bind({})
+Default.args = {
+  ...defaultProps,
+  variant: 'primary',
 }
 
-export const Large = Template.bind({})
-Large.args = {
-  size: 'large',
-  label: 'Button',
-}
+export const Variants: ComponentStory<typeof Button> = () => (
+  <div
+    style={{
+      display: 'flex',
+      gap: '16px',
+    }}
+  >
+    <Button variant="primary">Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="text">Text</Button>
+  </div>
+)
 
-export const Small = Template.bind({})
-Small.args = {
-  size: 'small',
-  label: 'Button',
-}
+export const Danger: ComponentStory<typeof Button> = () => (
+  <div
+    style={{
+      display: 'flex',
+      gap: '16px',
+    }}
+  >
+    <Button variant="primary" danger>
+      Button
+    </Button>
+    <Button variant="secondary" danger>
+      Button
+    </Button>
+    <Button variant="text" danger>
+      Button
+    </Button>
+  </div>
+)
+
+export const Sizes: ComponentStory<typeof Button> = () => (
+  <div
+    style={{
+      display: 'flex',
+      gap: '16px',
+    }}
+  >
+    <div>
+      <Button variant="primary" size="small">
+        Small
+      </Button>
+    </div>
+    <div>
+      <Button variant="primary" size="regular">
+        Regular
+      </Button>
+    </div>
+    <div>
+      <Button variant="primary" size="large">
+        Large
+      </Button>
+    </div>
+  </div>
+)
+
+export const Wide: ComponentStory<typeof Button> = () => (
+  <Button variant="primary" wide>
+    Wide Button
+  </Button>
+)

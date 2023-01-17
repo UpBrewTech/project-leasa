@@ -1,73 +1,62 @@
-import { useMemo } from 'react'
+import classnames from 'classnames'
 
-export interface ButtonProps {
-  /**
-   * Is this the principal call to action on the page?
-   */
-  primary?: boolean
-  /**
-   * What background color to use
-   */
-  backgroundColor?: string
-  /**
-   * How large should the button be?
-   */
-  size?: 'small' | 'medium' | 'large'
-  /**
-   * Button contents
-   */
-  label: string
-  /**
-   * Optional click handler
-   */
-  onClick?: () => void
+export type ButtonVariant = 'primary' | 'secondary' | 'text'
+
+export interface ButtonProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  variant?: ButtonVariant
+  danger?: boolean
+  size?: 'small' | 'regular' | 'large'
+  wide?: boolean
+  loading?: boolean
 }
 
-const getSizeClasses = (size: string) => {
-  switch (size) {
-    case 'small': {
-      return 'px-4 py-2'
-    }
-    case 'large': {
-      return 'px-6 py-3'
-    }
-    default: {
-      return 'px-5 py-2'
-    }
-  }
-}
-
-const getModeClasses = (isPrimary: boolean) =>
-  isPrimary
-    ? 'text-white bg-pink-600 border-pink-600'
-    : 'text-slate-700 bg-transparent border-slate-700'
-
-const BASE_BUTTON_CLASSES =
-  'cursor-pointer rounded-full border-2 font-bold leading-none inline-block'
-
-/**
- * Primary UI component for user interaction
- */
 export const Button = ({
-  primary = false,
-  size = 'medium',
-  label,
-  ...props
+  wide = false,
+  variant = 'primary',
+  size = 'regular',
+  danger,
+  children,
+  className,
+  ...otherProps
 }: ButtonProps) => {
-  const computedClasses = useMemo(() => {
-    const modeClass = getModeClasses(primary)
-    const sizeClass = getSizeClasses(size)
-
-    return [modeClass, sizeClass].join(' ')
-  }, [primary, size])
-
   return (
     <button
       type="button"
-      className={`${BASE_BUTTON_CLASSES} ${computedClasses}`}
-      {...props}
+      className={classnames(
+        'transition-all duration-200 ease-in-out',
+        'rounded-standard inline-block cursor-pointer border leading-none',
+        {
+          'px-sm py-xs text-sm': size === 'small',
+          'px-md py-st text-base': size === 'regular',
+          'px-lg py-sm text-lg': size === 'large',
+          'w-full': wide,
+        },
+        danger
+          ? {
+              'border-red-600 bg-red-600 text-white hover:border-red-600/75 hover:bg-red-600/75 hover:text-white/75':
+                variant === 'primary',
+              'border-red-600 bg-transparent text-red-600 hover:border-red-600/75 hover:text-red-600/75':
+                variant === 'secondary',
+              'border-transparent bg-transparent text-red-600 hover:text-red-600/75':
+                variant === 'text',
+            }
+          : {
+              'border-purple-600 bg-purple-600 text-white hover:border-purple-600/75 hover:bg-purple-600/75 hover:text-white/75':
+                variant === 'primary',
+              'border-purple-600 bg-transparent text-purple-600 hover:border-purple-600/75 hover:text-purple-600/75':
+                variant === 'secondary',
+              'border-transparent bg-transparent text-purple-600 hover:text-purple-600/75':
+                variant === 'text',
+            },
+        className
+      )}
+      {...otherProps}
     >
-      {label}
+      {children}
     </button>
   )
 }
