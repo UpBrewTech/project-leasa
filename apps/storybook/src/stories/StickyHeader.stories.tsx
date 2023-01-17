@@ -15,9 +15,7 @@ export default {
 } as ComponentMeta<typeof StickyHeader>
 
 const Template: ComponentStory<typeof StickyHeader> = (args) => (
-  <div className="bg-black">
-    <StickyHeader className="bg-gray-400" {...args} />
-  </div>
+  <StickyHeader style={{ backgroundColor: '#ccc' }} {...args} />
 )
 
 const defaultProps = {

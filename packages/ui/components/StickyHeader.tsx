@@ -16,7 +16,7 @@ export const StickyHeader = ({
   return (
     <header
       className={classnames(
-        'w-full fixed top-0 flex h-16 items-center',
+        'fixed top-0 left-0 flex h-16 w-full items-center p-4',
         className
       )}
       {...otherProps}
