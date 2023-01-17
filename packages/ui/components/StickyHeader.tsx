@@ -23,16 +23,16 @@ export const StickyHeader = ({
   return (
     <header
       className={classnames(
-        'fixed top-0 left-0 flex h-16 w-full items-center p-4',
+        'fixed top-0 left-0 flex w-full items-center px-4',
         {
           'bg-purple-600 text-white': variant === 'primary',
           'bg-slate-50': variant === 'light',
           'bg-slate-800 text-white': variant === 'dark',
         },
         {
-          'h-12 text-sm': size === 'sm',
-          'h-14 text-base': size === 'md',
-          'h-16 text-lg': size === 'lg',
+          'h-12 text-base': size === 'sm',
+          'h-14 text-lg': size === 'md',
+          'h-16 text-xl': size === 'lg',
         },
         {
           shadow: shadow === 'sm',

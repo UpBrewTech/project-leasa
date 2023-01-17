@@ -29,6 +29,46 @@ Default.args = {
   size: 'md',
 }
 
+export const Variants: ComponentStory<typeof StickyHeader> = () => (
+  <div
+    style={{
+      display: 'flex',
+      gap: '16px',
+      height: '400px',
+    }}
+  >
+    <StickyHeader variant="primary">
+      StickyHeader variant="primary"
+    </StickyHeader>
+    <StickyHeader style={{ top: '100px' }} variant="light">
+      StickyHeader variant="light"
+    </StickyHeader>
+    <StickyHeader style={{ top: '200px' }} variant="dark">
+      StickyHeader variant="dark"
+    </StickyHeader>
+  </div>
+)
+
+export const Sizes: ComponentStory<typeof StickyHeader> = () => (
+  <div
+    style={{
+      display: 'flex',
+      gap: '16px',
+      height: '400px',
+    }}
+  >
+    <StickyHeader variant="primary" size="lg">
+      StickyHeader size="lg"
+    </StickyHeader>
+    <StickyHeader style={{ top: '100px' }} variant="primary" size="md">
+      StickyHeader size="md"
+    </StickyHeader>
+    <StickyHeader style={{ top: '200px' }} variant="primary" size="sm">
+      StickyHeader size="sm"
+    </StickyHeader>
+  </div>
+)
+
 export const Shadow: ComponentStory<typeof StickyHeader> = () => (
   <div
     style={{
