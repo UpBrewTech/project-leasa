@@ -13,8 +13,8 @@ export type TypographyVariant =
 
 export interface TypographyProps<T extends React.ElementType>
   extends React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLHRElement
+    React.ButtonHTMLAttributes<HTMLSpanElement>,
+    HTMLSpanElement
   > {
   as?: T
   variant: TypographyVariant

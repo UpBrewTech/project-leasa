@@ -28,8 +28,7 @@ export const Button = ({
       type="button"
       className={classnames(
         'transition-all duration-200 ease-in-out',
-        'hover:bg-opacity-75 hover:text-opacity-75 hover:border-opacity-75',
-        'cursor-pointer rounded-standard border leading-none inline-block',
+        'rounded-standard inline-block cursor-pointer border leading-none',
         {
           'px-sm py-xs text-sm': size === 'small',
           'px-md py-st text-base': size === 'regular',
@@ -38,18 +37,19 @@ export const Button = ({
         },
         danger
           ? {
-              'text-white bg-red-600 border-red-600': variant === 'primary',
-              'text-red-600 bg-transparent border-red-600':
+              'border-red-600 bg-red-600 text-white hover:border-red-600/75 hover:bg-red-600/75 hover:text-white/75':
+                variant === 'primary',
+              'border-red-600 bg-transparent text-red-600 hover:border-red-600/75 hover:text-red-600/75':
                 variant === 'secondary',
-              'text-red-600 bg-transparent border-transparent':
+              'border-transparent bg-transparent text-red-600 hover:text-red-600/75':
                 variant === 'text',
             }
           : {
-              'text-white bg-primary-600 border-primary-600':
+              'border-purple-600 bg-purple-600 text-white hover:border-purple-600/75 hover:bg-purple-600/75 hover:text-white/75':
                 variant === 'primary',
-              'text-primary-600 bg-transparent border-primary-600':
+              'border-purple-600 bg-transparent text-purple-600 hover:border-purple-600/75 hover:text-purple-600/75':
                 variant === 'secondary',
-              'text-primary-600 bg-transparent border-transparent':
+              'border-transparent bg-transparent text-purple-600 hover:text-purple-600/75':
                 variant === 'text',
             },
         className

@@ -57,12 +57,12 @@ export const Pagination = ({
         onClick={createPageOnClickHandler(1)}
         className={classnames(
           'px-4',
-          'text-primary-600',
-          'border border-primary-300',
+          'text-purple-600',
+          'border border-purple-300',
           'relative inline-flex items-center',
-          'hover:bg-primary-50 focus:z-20',
+          'hover:bg-purple-50 focus:z-20',
           {
-            'bg-primary-100 z-20': 1 === activePage,
+            'z-20 bg-purple-100': 1 === activePage,
           }
         )}
       >
@@ -74,8 +74,8 @@ export const Pagination = ({
         <button
           className={classnames(
             'px-sm',
-            'text-primary-600',
-            'border border-primary-300',
+            'text-purple-600',
+            'border border-purple-300',
             'relative inline-flex items-center'
           )}
           disabled
@@ -94,12 +94,12 @@ export const Pagination = ({
         onClick={createPageOnClickHandler(buttonPage)}
         className={classnames(
           'px-sm',
-          'text-primary-600',
-          'border border-primary-300',
+          'text-purple-600',
+          'border border-purple-300',
           'relative inline-flex items-center',
-          'hover:bg-primary-50 focus:z-20',
+          'hover:bg-purple-50 focus:z-20',
           {
-            'bg-primary-100 z-20': buttonPage === activePage,
+            'z-20 bg-purple-100': buttonPage === activePage,
           }
         )}
       >
@@ -114,8 +114,8 @@ export const Pagination = ({
         <button
           className={classnames(
             'px-sm',
-            'text-primary-600',
-            'border border-primary-300',
+            'text-purple-600',
+            'border border-purple-300',
             'relative inline-flex items-center'
           )}
           disabled
@@ -129,12 +129,12 @@ export const Pagination = ({
         onClick={createPageOnClickHandler(totalPageCount)}
         className={classnames(
           'px-sm',
-          'text-primary-600',
-          'border border-primary-300',
+          'text-purple-600',
+          'border border-purple-300',
           'relative inline-flex items-center',
-          'hover:bg-primary-50 focus:z-20',
+          'hover:bg-purple-50 focus:z-20',
           {
-            'bg-primary-100 z-20': totalPageCount === activePage,
+            'z-20 bg-purple-100': totalPageCount === activePage,
           }
         )}
       >
@@ -148,14 +148,14 @@ export const Pagination = ({
       <div className="flex items-center justify-between">
         <div className="flex flex-1 justify-between sm:hidden">
           <button
-            className="relative inline-flex items-center rounded-md border border-primary-300 px-sm text-primary-700 hover:bg-primary-50"
+            className="px-sm relative inline-flex items-center rounded-md border border-purple-300 text-purple-700 hover:bg-purple-50"
             onClick={createPageOnClickHandler(activePage - 1)}
             disabled={!hasPrevPage}
           >
             <Typography variant="label-small">Previous</Typography>
           </button>
           <button
-            className="relative ml-3 inline-flex items-center rounded-md border border-primary-300 px-sm text-primary-700 hover:bg-primary-50"
+            className="px-sm relative ml-3 inline-flex items-center rounded-md border border-purple-300 text-purple-700 hover:bg-purple-50"
             onClick={createPageOnClickHandler(activePage + 1)}
             disabled={!hasNextPage}
           >
@@ -182,11 +182,11 @@ export const Pagination = ({
               <button
                 className={classnames(
                   'px-2 ',
-                  'border border-primary-300 rounded-l-md',
+                  'rounded-l-md border border-purple-300',
                   'relative inline-flex items-center',
                   hasPrevPage
-                    ? 'hover:bg-primary-50 focus:z-20 text-primary-600'
-                    : 'text-primary-300'
+                    ? 'text-purple-600 hover:bg-purple-50 focus:z-20'
+                    : 'text-purple-300'
                 )}
                 disabled={!hasPrevPage}
                 onClick={createPageOnClickHandler(activePage - 1)}
@@ -213,11 +213,11 @@ export const Pagination = ({
               <button
                 className={classnames(
                   'px-2 ',
-                  'border border-primary-300 rounded-r-md',
+                  'rounded-r-md border border-purple-300',
                   'relative inline-flex items-center',
                   hasNextPage
-                    ? 'hover:bg-primary-50 focus:z-20 text-primary-600'
-                    : 'text-primary-300'
+                    ? 'text-purple-600 hover:bg-purple-50 focus:z-20'
+                    : 'text-purple-300'
                 )}
                 disabled={!hasNextPage}
                 onClick={createPageOnClickHandler(activePage + 1)}

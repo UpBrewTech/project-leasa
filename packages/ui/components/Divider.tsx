@@ -1,16 +1,12 @@
 import classnames from 'classnames'
 
-export interface DividerProps
-  extends React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLHRElement
-  > {}
+export type DividerProps = React.HtmlHTMLAttributes<HTMLHRElement>
 
 export const Divider = ({ className }: DividerProps) => {
   return (
     <hr
       className={classnames(
-        'border-t border-neutral-100 bg-white my-sm',
+        'my-sm border-t border-neutral-100 bg-white',
         className
       )}
     />
