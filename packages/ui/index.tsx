@@ -1,6 +1,5 @@
 export * from './components/Button'
 export * from './components/Divider'
-export * from './components/Menu'
 export * from './components/Pagination'
 export * from './components/StickyHeader'
 export * from './components/Typography'
