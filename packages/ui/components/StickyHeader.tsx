@@ -7,43 +7,29 @@ export interface StickyHeaderProps
       HTMLElement
     >,
     PropsWithChildren {
-  variant?: 'primary' | 'light' | 'dark'
-  size?: 'sm' | 'md' | 'lg'
-  shadow?: 'sm' | 'md' | 'lg'
+  alternative?: boolean
 }
 
 export const StickyHeader = ({
   children,
-  variant = 'primary',
-  size = 'md',
-  shadow,
+  alternative,
   className,
   ...otherProps
 }: StickyHeaderProps) => {
   return (
     <header
       className={classnames(
-        'fixed top-0 left-0 flex w-full items-center px-4',
-        {
-          'bg-purple-600 text-white': variant === 'primary',
-          'bg-slate-50': variant === 'light',
-          'bg-slate-800 text-white': variant === 'dark',
-        },
-        {
-          'h-12 text-base': size === 'sm',
-          'h-14 text-lg': size === 'md',
-          'h-16 text-xl': size === 'lg',
-        },
-        {
-          shadow: shadow === 'sm',
-          'shadow-md': shadow === 'md',
-          'shadow-lg': shadow === 'lg',
-        },
+        'align-between sticky top-0 left-0 flex w-full items-center',
+        'px-md py-sm',
+        'shadow-md',
+        alternative ? 'bg-purple-600 text-white' : 'bg-white text-purple-600',
         className
       )}
       {...otherProps}
     >
-      {children}
+      <div className="shrink-0">Logo</div>
+      <div className="grow text-right">{children}</div>
+      <div className="ml-sm shrink-0">Avatar</div>
     </header>
   )
 }

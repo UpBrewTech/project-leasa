@@ -1,5 +1,4 @@
 import classnames from 'classnames'
-import Link from 'next/link'
 
 export interface MenuItem {
   text: string
@@ -45,7 +44,7 @@ export const Menu = ({
     >
       {items.map((item, key) => {
         return (
-          <Link
+          <a
             key={key}
             href={item.url}
             className={classnames(
@@ -66,7 +65,7 @@ export const Menu = ({
             )}
           >
             {item.text}
-          </Link>
+          </a>
         )
       })}
     </div>
