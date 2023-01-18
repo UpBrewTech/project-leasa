@@ -9,17 +9,17 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
+    "sb": "turbo run storybook",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
-    "prettier": "latest",
+    "prettier": "^2.8.2",
     "turbo": "latest"
   },
   "engines": {
     "node": ">=16.11.0"
   },
-  "dependencies": {},
   "packageManager": "pnpm@7.18.2"
 }
