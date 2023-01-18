@@ -29,6 +29,23 @@ module.exports = {
       borderRadius: {
         standard: '4px',
       },
+      keyframes: {
+        'high-bounce': {
+          '0%, 100%': {
+            transform: 'translateY(0)',
+            'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)',
+          },
+          '50%': {
+            transform: 'translateY(-200%)',
+            'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
+          },
+        },
+      },
+      animation: {
+        'loading-dot-1': 'high-bounce 1.1s infinite',
+        'loading-dot-2': 'high-bounce 1.1s infinite -0.8s',
+        'loading-dot-3': 'high-bounce 1.1s infinite -0.6s',
+      },
     },
   },
 
