@@ -23,11 +23,14 @@ export const Button = ({
   children,
   className,
   loading,
+  disabled,
   ...otherProps
 }: ButtonProps) => {
+  const isDisabled = disabled || loading
   return (
     <button
       type="button"
+      disabled={disabled || loading}
       className={classnames(
         'relative',
         'transition-all duration-200 ease-in-out',
@@ -39,11 +42,14 @@ export const Button = ({
           'w-full': wide,
         },
 
-        danger && loading
+        danger && isDisabled
           ? {
-              'border-red-100 bg-red-100': variant === 'primary',
-              'border-red-100 bg-transparent': variant === 'secondary',
-              'border-transparent bg-transparent': variant === 'text',
+              'border-red-100 bg-red-100 text-red-600/75':
+                variant === 'primary',
+              'border-red-100 bg-transparent text-red-600/75':
+                variant === 'secondary',
+              'border-transparent bg-transparent text-red-600/75':
+                variant === 'text',
             }
           : danger
           ? {
@@ -54,11 +60,14 @@ export const Button = ({
               'border-transparent bg-transparent text-red-600 hover:text-red-600/75':
                 variant === 'text',
             }
-          : loading
+          : isDisabled
           ? {
-              'border-purple-100 bg-purple-100': variant === 'primary',
-              'border-purple-100 bg-transparent': variant === 'secondary',
-              'border-transparent bg-transparent': variant === 'text',
+              'border-purple-100 bg-purple-100 text-purple-600/75':
+                variant === 'primary',
+              'border-purple-100 bg-transparent text-purple-600/75':
+                variant === 'secondary',
+              'border-transparent bg-transparent text-purple-600/75':
+                variant === 'text',
             }
           : {
               'border-purple-600 bg-purple-600 text-white hover:border-purple-600/75 hover:bg-purple-600/75 hover:text-white/75':

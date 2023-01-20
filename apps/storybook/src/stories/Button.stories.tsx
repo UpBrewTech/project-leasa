@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { Button } from 'ui/components/Button'
+import { Button, ButtonProps } from 'ui/components/Button'
 
 export default {
   title: 'Example/Button',
@@ -14,13 +14,14 @@ export default {
   },
 } as ComponentMeta<typeof Button>
 
-const Template: ComponentStory<typeof Button> = (args) => (
+const Template: ComponentStory<typeof Button> = (args: ButtonProps) => (
   <Button wide={false} {...args} />
 )
 
-const defaultProps = {
+const defaultProps: ButtonProps = {
   children: 'Button',
   danger: false,
+  loading: false,
 }
 
 export const Default = Template.bind({})
@@ -91,3 +92,81 @@ export const Wide: ComponentStory<typeof Button> = () => (
     Wide Button
   </Button>
 )
+
+const showAllButtons = (props: ButtonProps) => {
+  return (
+    <div>
+      Variants
+      <div
+        style={{
+          display: 'flex',
+          gap: '16px',
+        }}
+      >
+        <Button variant="primary" {...props}>
+          Primary
+        </Button>
+        <Button variant="secondary" {...props}>
+          Secondary
+        </Button>
+        <Button variant="text" {...props}>
+          Text
+        </Button>
+      </div>
+      Danger
+      <div
+        style={{
+          display: 'flex',
+          gap: '16px',
+        }}
+      >
+        <Button variant="primary" {...props} disabled>
+          Button
+        </Button>
+        <Button variant="secondary" {...props} disabled>
+          Button
+        </Button>
+        <Button variant="text" {...props} disabled>
+          Button
+        </Button>
+      </div>
+      Sizes
+      <div
+        style={{
+          display: 'flex',
+          gap: '16px',
+        }}
+      >
+        <div>
+          <Button variant="primary" size="small" {...props}>
+            Small
+          </Button>
+        </div>
+        <div>
+          <Button variant="primary" size="regular" {...props}>
+            Regular
+          </Button>
+        </div>
+        <div>
+          <Button variant="primary" size="large" {...props}>
+            Large
+          </Button>
+        </div>
+      </div>
+      Wide
+      <Button variant="primary" size="large" wide {...props}>
+        Wide Button
+      </Button>
+    </div>
+  )
+}
+
+export const Disabled: ComponentStory<typeof Button> = () =>
+  showAllButtons({
+    disabled: true,
+  })
+
+export const Loading: ComponentStory<typeof Button> = () =>
+  showAllButtons({
+    loading: true,
+  })
