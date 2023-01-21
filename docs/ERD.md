@@ -51,6 +51,6 @@ erDiagram
 ```mermaid
 erDiagram
     OWNER ||--o{ PROPERTY : "owns"
-    OWNER ||--o{ LISTING : "can publish"
-    PROPERTY ||--o| LISTING : "is active"
+    OWNER ||--o{ LISTING : "publishes"
+    PROPERTY ||--o| LISTING : "references"
 ```
