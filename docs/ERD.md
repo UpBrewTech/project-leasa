@@ -45,12 +45,3 @@ erDiagram
     CUSTOMER ||--o{ CONTRACT : "signs"
     CUSTOMER |o--|{ STATEMENT : "fulfills"
 ```
-
-**Sample ERD for OWNER - PROPERTY - LISTING**
-
-```mermaid
-erDiagram
-    OWNER ||--o{ PROPERTY : "owns"
-    OWNER ||--o{ LISTING : "publishes"
-    PROPERTY ||--o| LISTING : "references"
-```
