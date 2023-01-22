@@ -1,4 +1,4 @@
-* This document is still in active development
+- This document is still in active development
 
 ```mermaid
 erDiagram
@@ -44,4 +44,42 @@ erDiagram
     CONTRACT }|--|| TERM : "one of"
     CUSTOMER ||--o{ CONTRACT : "signs"
     CUSTOMER |o--|{ STATEMENT : "fulfills"
+```
+
+OWNER - LISTING - CONTRACT
+
+```mermaid
+erDiagram
+    OWNER ||--o{ LISTING : "publish"
+    CUSTOMERS }o--|| LISTING: "applies"
+    OWNER ||--|| CUSTOMER : "accepts from listing_applicants"
+    OWNER ||--|| CONTRACT :"creates"
+    CONTRACT ||--|| CUSTOMER: "signs"
+```
+
+SEQUENCE OF SATISFATION
+
+```mermaid
+sequenceDiagram
+    participant OWNER
+    participant LISTING
+    participant CONTRACT
+    participant CUSTOMER
+
+    OWNER-->>LISTING: creates
+    CUSTOMER-->>LISTING: applies (listing_applicants)
+
+    loop satisfy me!
+        OWNER-->LISTING: reviews applicants
+    end
+
+    par
+        OWNER->>LISTING: accepts a customer
+        OWNER-->LISTING: listing is removed
+        OWNER-->>CONTRACT: creates a contract of lease
+    end
+
+    CONTRACT-->>CUSTOMER: receives
+    CUSTOMER-->>CONTRACT: accepts
+    OWNER-->CUSTOMER: satisfaction achievement unlocked!
 ```
