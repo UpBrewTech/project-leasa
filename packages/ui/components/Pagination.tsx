@@ -11,10 +11,7 @@ const MAX_PAGES_SHOWN = 5
 
 export interface PaginationProps
   extends PaginationMeta,
-    React.DetailedHTMLProps<
-      React.ButtonHTMLAttributes<HTMLButtonElement>,
-      HTMLDivElement
-    > {
+    React.ReactHTMLElement<HTMLDivElement> {
   defaultPage: number
   onPageChange: (page: number) => void
 }
