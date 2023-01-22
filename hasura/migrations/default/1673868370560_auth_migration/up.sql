@@ -12,7 +12,7 @@ CREATE TABLE public.users (
 );
 CREATE TABLE public.user_credentials (
     user_id uuid NOT NULL,
-    username text NOT NULL,
+    identifier text NOT NULL,
     password text NOT NULL
 );
 CREATE TABLE public.user_providers (
@@ -39,21 +39,21 @@ CREATE TABLE public.user_tokens (
 );
 
 -- triggers and functions
-CREATE OR REPLACE FUNCTION public.authenticate(username text, password text) RETURNS public.users
+CREATE OR REPLACE FUNCTION public.authenticate(identifier text, password text) RETURNS public.users
     LANGUAGE sql STABLE
     AS $$
 SELECT users.*
     FROM users
     JOIN user_credentials
     ON user_credentials.user_id = users.id
-    WHERE user_credentials.username = authenticate.username
+    WHERE user_credentials.identifier = authenticate.identifier
     	AND user_credentials.password = crypt(authenticate.password, user_credentials.password)
 $$;
 CREATE OR REPLACE FUNCTION public.fortify_credentials() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
- NEW.username := LOWER(REGEXP_REPLACE(TRIM(NEW.username), '\s+', '_'));
+ NEW.identifier := LOWER(REGEXP_REPLACE(TRIM(NEW.identifier), '\s+', '_'));
  NEW.password := crypt(NEW.password, gen_salt('bf', 8));
  RETURN NEW;
 END
