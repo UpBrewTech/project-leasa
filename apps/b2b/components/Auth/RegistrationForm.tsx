@@ -2,17 +2,10 @@ import { gql, useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ErrorMessage from 'components/ErrorMessage'
 import Input from 'components/Input'
-import { User } from 'next-auth'
-import { signIn } from 'next-auth/react'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { Button, Typography } from 'ui'
-
-import useToggle from 'utils/useToggle'
 import * as yup from 'yup'
-
-type OnSubmitResult = {
-  user: User
-}
 
 const FormSchema = yup.object({
   name: yup.string().required().label('Name'),
@@ -28,75 +21,88 @@ const FormSchema = yup.object({
 type FormInputs = yup.InferType<typeof FormSchema>
 
 const RegistrationForm = () => {
-  const { state: isSubmitted, toggle: toggleSubmitted } = useToggle()
   const [registerUser, { loading }] = useMutation(REGISTER_USER)
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitted },
   } = useForm<FormInputs>({
     resolver: yupResolver(FormSchema),
   })
 
   const onSubmit = handleSubmit((data: FormInputs) => {
+    const { name, email, password } = data
+
     registerUser({
-      variables: data,
-      onCompleted: (data: OnSubmitResult) => {
-        signIn('email', {
-          email: data.user.email,
-          redirect: false,
-          callbackUrl: '/auth',
-        })
-        toggleSubmitted()
+      variables: {
+        objects: [
+          {
+            name,
+            email,
+            user_credential: { data: { identifier: email, password } },
+          },
+        ],
       },
     })
   })
 
-  if (isSubmitted) {
+  if (!!errors && isSubmitted) {
     return (
       <div className="text-center">
-        <Typography as="h2" variant="label-large">
-          Success!
-        </Typography>
-        <Button>Login</Button>
+        <div className="mb-4">
+          <Typography as="h2" variant="title-section">
+            Success!
+          </Typography>
+        </div>
+        <Link href="/auth/login">
+          <Button>Login</Button>
+        </Link>
       </div>
     )
   }
 
   return (
     <form onSubmit={onSubmit} className="grid gap-4 text-sm">
-      <Input
-        type="text"
-        id="name"
-        placeholder="Full Name"
-        {...register('name')}
-      />
-      <ErrorMessage message={errors.name?.message} />
-      <Input
-        type="email"
-        id="email"
-        placeholder="Email"
-        {...register('email')}
-      />
-      <Input
-        type="password"
-        id="password"
-        placeholder="Password"
-        {...register('password')}
-      />
-      <ErrorMessage message={errors.password?.message} />
-      <Input
-        type="password"
-        id="confirm_password"
-        placeholder="Confirm Password"
-        {...register('confirm_password')}
-      />
-      <ErrorMessage message={errors.confirm_password?.message} />
+      <div>
+        <Input type="text" id="name" placeholder="Name" {...register('name')} />
+        <ErrorMessage message={errors.name?.message} />
+      </div>
+      <div>
+        <Input
+          type="email"
+          id="email"
+          placeholder="Email"
+          {...register('email')}
+        />
+        <ErrorMessage message={errors.email?.message} />
+      </div>
+      <div>
+        <Input
+          type="password"
+          id="password"
+          placeholder="Password"
+          {...register('password')}
+        />
+        <ErrorMessage message={errors.password?.message} />
+      </div>
+      <div>
+        <Input
+          type="password"
+          id="confirm_password"
+          placeholder="Confirm Password"
+          {...register('confirm_password')}
+        />
+        <ErrorMessage message={errors.confirm_password?.message} />
+      </div>
 
       <Button wide type="submit" loading={loading || isSubmitting}>
         Register
       </Button>
-      <Button wide>Back to Login</Button>
+      <Link href="/auth/login">
+        <Button wide variant="text">
+          Back to Login
+        </Button>
+      </Link>
     </form>
   )
 }
@@ -105,22 +111,14 @@ export default RegistrationForm
 
 const REGISTER_USER = gql`
   mutation RegisterUser(
-    $email: String!
-    $name: String!
-    $phone: String!
-    $username: String!
-    $password: String!
+    $objects: [users_insert_input!] = {
+      email: ""
+      name: ""
+      user_credential: { data: { identifier: "", password: "" } }
+    }
   ) {
-    user: insert_users_one(
-      object: {
-        name: $name
-        email: $email
-        phone: $phone
-        user_credential: { data: { username: $username, password: $password } }
-      }
-    ) {
-      id
-      email
+    insert_users(objects: $objects) {
+      affected_rows
     }
   }
 `
