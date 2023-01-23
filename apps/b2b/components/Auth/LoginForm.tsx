@@ -24,7 +24,7 @@ const LoginForm = () => {
   })
 
   const onSubmit = handleSubmit((data: FormInputs) => {
-    signIn('credentials', { ...data, callbackUrl: '/dashboard' })
+    signIn('credentials', { ...data, callbackUrl: '/auth' })
   })
 
   return (
@@ -33,8 +33,9 @@ const LoginForm = () => {
         <Input
           type="email"
           id="identifier"
+          name="identifier"
+          register={register}
           placeholder="Email"
-          {...register('identifier')}
         />
         <ErrorMessage message={errors.identifier?.message} />
       </div>
@@ -42,8 +43,9 @@ const LoginForm = () => {
         <Input
           type="password"
           id="password"
+          name="password"
+          register={register}
           placeholder="Password"
-          {...register('password')}
         />
         <ErrorMessage message={errors.password?.message} />
       </div>

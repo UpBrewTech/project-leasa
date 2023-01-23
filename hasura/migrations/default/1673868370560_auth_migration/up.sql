@@ -60,14 +60,18 @@ END
 $$;
 
 -- alters
-ALTER TABLE ONLY public.user_credentials
-    ADD CONSTRAINT user_credentials_pkey PRIMARY KEY (user_id);
-ALTER TABLE ONLY public.user_providers
-    ADD CONSTRAINT user_providers_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
+ALTER TABLE ONLY public.user_credentials
+    ADD CONSTRAINT user_credentials_pkey PRIMARY KEY (user_id);
 CREATE TRIGGER fortify_credentials BEFORE INSERT OR UPDATE ON public.user_credentials FOR EACH ROW EXECUTE FUNCTION public.fortify_credentials();
 ALTER TABLE ONLY public.user_credentials
     ADD CONSTRAINT user_credentials_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ONLY public.user_providers
+    ADD CONSTRAINT user_providers_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.user_providers
     ADD CONSTRAINT "user_providers_userId_fkey" FOREIGN KEY ("userId") REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;

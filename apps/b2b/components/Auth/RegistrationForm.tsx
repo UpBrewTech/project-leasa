@@ -47,7 +47,7 @@ const RegistrationForm = () => {
     })
   })
 
-  if (!errors && isSubmitted) {
+  if (errors && isSubmitted) {
     return (
       <div className="text-center">
         <div className="mb-4">
@@ -65,15 +65,22 @@ const RegistrationForm = () => {
   return (
     <form onSubmit={onSubmit} className="grid gap-4">
       <div>
-        <Input type="text" id="name" placeholder="Name" {...register('name')} />
+        <Input
+          type="text"
+          id="name"
+          name="name"
+          register={register}
+          placeholder="Name"
+        />
         <ErrorMessage message={errors.name?.message} />
       </div>
       <div>
         <Input
           type="email"
           id="email"
+          name="email"
+          register={register}
           placeholder="Email"
-          {...register('email')}
         />
         <ErrorMessage message={errors.email?.message} />
       </div>
@@ -81,8 +88,9 @@ const RegistrationForm = () => {
         <Input
           type="password"
           id="password"
+          name="password"
+          register={register}
           placeholder="Password"
-          {...register('password')}
         />
         <ErrorMessage message={errors.password?.message} />
       </div>
@@ -90,8 +98,9 @@ const RegistrationForm = () => {
         <Input
           type="password"
           id="confirm_password"
+          name="confirm_password"
+          register={register}
           placeholder="Confirm Password"
-          {...register('confirm_password')}
         />
         <ErrorMessage message={errors.confirm_password?.message} />
       </div>
@@ -111,13 +120,7 @@ const RegistrationForm = () => {
 export default RegistrationForm
 
 const REGISTER_USER = gql`
-  mutation RegisterUser(
-    $objects: [users_insert_input!] = {
-      email: ""
-      name: ""
-      user_credential: { data: { identifier: "", password: "" } }
-    }
-  ) {
+  mutation RegisterUser($objects: [users_insert_input!] = {}) {
     insert_users(objects: $objects) {
       affected_rows
     }
