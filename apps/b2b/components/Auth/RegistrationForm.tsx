@@ -46,7 +46,7 @@ const RegistrationForm = () => {
     })
   })
 
-  if (!!errors && isSubmitted) {
+  if (!errors && isSubmitted) {
     return (
       <div className="text-center">
         <div className="mb-4">
@@ -62,7 +62,7 @@ const RegistrationForm = () => {
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-4 text-sm">
+    <form onSubmit={onSubmit} className="grid gap-4">
       <div>
         <Input type="text" id="name" placeholder="Name" {...register('name')} />
         <ErrorMessage message={errors.name?.message} />

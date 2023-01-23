@@ -10,17 +10,7 @@ import {
 interface InputProps
   extends HTMLAttributes<HTMLInputElement>,
     ClassAttributes<HTMLInputElement>,
-    HTMLProps<HTMLInputElement> {
-  type?:
-    | 'text'
-    | 'email'
-    | 'number'
-    | 'password'
-    | 'tel'
-    | 'file'
-    | 'date'
-    | 'search'
-}
+    HTMLProps<HTMLInputElement> {}
 
 const Input = forwardRef(
   (props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
@@ -30,7 +20,7 @@ const Input = forwardRef(
         ref={ref}
         type={type}
         className={classNames(
-          'block w-full border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:outline-none focus:ring-0 h-10',
+          'block w-full border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:outline-none focus:ring-0 h-10',
           className
         )}
         {...otherProps}

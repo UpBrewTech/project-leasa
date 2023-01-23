@@ -35,30 +35,33 @@ const ApolloClientProvider = ({ children }: PropsWithChildren) => {
 
   const httpLink = new HttpLink({ uri: HTTP_URL })
 
-  const wsLink = isServer
-    ? null
-    : new GraphQLWsLink(
-        createClient({
-          url: WS_URL,
-          connectionParams: {
-            headers: authHeaders,
-          },
-        })
-      )
+  let wsLink = null,
+    splitLink
 
-  const splitLink = isServer
-    ? httpLink
-    : split(
-        ({ query }) => {
-          const definition = getMainDefinition(query)
-          return (
-            definition.kind === 'OperationDefinition' &&
-            definition.operation === 'subscription'
-          )
+  if (isServer) {
+    splitLink = httpLink
+  } else {
+    wsLink = new GraphQLWsLink(
+      createClient({
+        url: WS_URL,
+        connectionParams: {
+          headers: authHeaders,
         },
-        wsLink as GraphQLWsLink,
-        httpLink
-      )
+      })
+    )
+
+    splitLink = split(
+      ({ query }) => {
+        const definition = getMainDefinition(query)
+        return (
+          definition.kind === 'OperationDefinition' &&
+          definition.operation === 'subscription'
+        )
+      },
+      wsLink,
+      httpLink
+    )
+  }
 
   const client = new ApolloClient({
     cache: new InMemoryCache(),

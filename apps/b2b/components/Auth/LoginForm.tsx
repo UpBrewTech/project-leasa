@@ -1,11 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import ErrorMessage from 'components/ErrorMessage'
 import Input from 'components/Input'
-
 import { signIn } from 'next-auth/react'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
-import { Button } from 'ui'
-
+import { Button } from 'ui/components/Button'
 import * as yup from 'yup'
 
 const FormSchema = yup.object({
@@ -30,7 +29,7 @@ const LoginForm = () => {
   })
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-4 text-sm">
+    <form onSubmit={onSubmit} className="grid gap-4">
       <div>
         <Input
           type="email"
@@ -53,6 +52,11 @@ const LoginForm = () => {
       <Button wide type="submit">
         Login
       </Button>
+      <Link href="/auth/register">
+        <Button wide variant="text">
+          Register
+        </Button>
+      </Link>
     </form>
   )
 }

@@ -18,7 +18,6 @@ importers:
       '@babel/core': ^7.0.0
       '@hookform/resolvers': ^2.9.10
       '@types/jsonwebtoken': ^9.0.0
-      '@types/lodash': ^4.14.191
       '@types/node': 18.11.3
       '@types/react': 18.0.21
       '@types/react-dom': 18.0.6
@@ -30,7 +29,6 @@ importers:
       graphql: 15.8.0
       graphql-ws: ^5.11.2
       jsonwebtoken: ^9.0.0
-      lodash: ^4.17.21
       next: 13.0.0
       next-auth: ^4.18.8
       nodemailer: ^6.8.0
@@ -52,7 +50,6 @@ importers:
       graphql: 15.8.0
       graphql-ws: 5.11.2_graphql@15.8.0
       jsonwebtoken: 9.0.0
-      lodash: 4.17.21
       next: 13.0.0_pjwopsidmaokadturxaafygjp4
       next-auth: 4.18.8_ddf7nqhf4krd45h2feh5wbeog4
       nodemailer: 6.9.0
@@ -65,7 +62,6 @@ importers:
     devDependencies:
       '@babel/core': 7.20.12
       '@types/jsonwebtoken': 9.0.1
-      '@types/lodash': 4.14.191
       '@types/node': 18.11.3
       '@types/react': 18.0.21
       '@types/react-dom': 18.0.6

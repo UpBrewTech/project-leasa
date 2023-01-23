@@ -1,3 +1,5 @@
+import { Typography } from 'ui/components/Typography'
+
 interface Props {
   message?: string
 }
@@ -5,7 +7,11 @@ interface Props {
 const ErrorMessage = ({ message }: Props) => {
   if (!message) return null
 
-  return <span className="mt-1 block text-xs text-red-600">{message}</span>
+  return (
+    <Typography variant="label-small" className="mt-1 block text-red-600">
+      {message}
+    </Typography>
+  )
 }
 
 export default ErrorMessage
