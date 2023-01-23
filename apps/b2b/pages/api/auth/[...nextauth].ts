@@ -56,7 +56,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       encode: async ({ token, secret, maxAge }) => {
         const jwtToken = {
           ...token,
-          exp: setTokenExpiration({ exp: token?.exp, maxAge }),
+          exp: computeTokenExpiration({ exp: token?.exp, maxAge }),
         }
 
         const encodedToken = jwt.sign(jwtToken, secret, { algorithm: 'HS256' })
@@ -122,7 +122,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   })
 }
 
-const setTokenExpiration = ({
+const computeTokenExpiration = ({
   exp,
   maxAge = MAX_AGE,
 }: {
