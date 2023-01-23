@@ -1,6 +1,7 @@
 import RegistrationForm from 'components/Auth/RegistrationForm'
 import { AppPage } from 'pages/_app'
-import { PanelLayout, Typography } from 'ui'
+import { Typography } from 'ui/components/Typography'
+import { PanelLayout } from 'ui/Layouts/Panel'
 
 const Register: AppPage = () => {
   return (

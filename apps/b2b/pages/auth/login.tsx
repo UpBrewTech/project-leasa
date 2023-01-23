@@ -1,6 +1,7 @@
 import LoginForm from 'components/Auth/LoginForm'
 import { AppPage } from 'pages/_app'
-import { PanelLayout, Typography } from 'ui'
+import { Typography } from 'ui/components/Typography'
+import { PanelLayout } from 'ui/Layouts/Panel'
 
 const Login: AppPage = () => {
   return (

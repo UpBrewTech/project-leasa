@@ -13,7 +13,6 @@ const FormSchema = yup.object({
 })
 
 type FormInputs = yup.InferType<typeof FormSchema>
-export type LoginFormInputs = FormInputs
 
 const LoginForm = () => {
   const {
@@ -33,7 +32,7 @@ const LoginForm = () => {
       <div>
         <Input
           type="email"
-          id="email"
+          id="identifier"
           placeholder="Email"
           {...register('identifier')}
         />

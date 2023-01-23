@@ -4,7 +4,8 @@ import ErrorMessage from 'components/ErrorMessage'
 import Input from 'components/Input'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
-import { Button, Typography } from 'ui'
+import { Button } from 'ui/components/Button'
+import { Typography } from 'ui/components/Typography'
 import * as yup from 'yup'
 
 const FormSchema = yup.object({
