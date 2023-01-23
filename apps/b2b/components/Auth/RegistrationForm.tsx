@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import ErrorMessage from 'components/ErrorMessage'
 import Input from 'components/Input'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from 'ui/components/Button'
 import { Typography } from 'ui/components/Typography'
@@ -22,11 +23,12 @@ const FormSchema = yup.object({
 type FormInputs = yup.InferType<typeof FormSchema>
 
 const RegistrationForm = () => {
+  const [isSuccess, setSuccess] = useState(false)
   const [registerUser, { loading }] = useMutation(REGISTER_USER)
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitted },
+    formState: { errors },
   } = useForm<FormInputs>({
     resolver: yupResolver(FormSchema),
   })
@@ -44,10 +46,13 @@ const RegistrationForm = () => {
           },
         ],
       },
+      onCompleted: () => {
+        setSuccess(true)
+      },
     })
   })
 
-  if (errors && isSubmitted) {
+  if (isSuccess) {
     return (
       <div className="text-center">
         <div className="mb-4">
@@ -105,7 +110,7 @@ const RegistrationForm = () => {
         <ErrorMessage message={errors.confirm_password?.message} />
       </div>
 
-      <Button wide type="submit" loading={loading || isSubmitting}>
+      <Button wide type="submit" loading={loading}>
         Register
       </Button>
       <Link href="/auth/login">
