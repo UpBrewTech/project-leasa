@@ -5,12 +5,10 @@ import { PanelLayout } from 'ui/Layouts/Panel'
 
 const Login: AppPage = () => {
   return (
-    <div className="w-full bg-white p-8 shadow-sm sm:w-96">
-      <div className="mb-6 text-center">
-        <Typography as="h1" variant="title-page">
-          Login
-        </Typography>
-      </div>
+    <div className="p-md w-full bg-white shadow-sm sm:w-96">
+      <Typography as="h1" variant="title-page" className="mb-xs text-center">
+        Login
+      </Typography>
 
       <LoginForm />
     </div>

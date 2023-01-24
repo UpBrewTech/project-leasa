@@ -14,7 +14,7 @@ const Input = ({ register, name, className, ...otherFields }: InputProps) => {
     <input
       {...(register && name && register(name))}
       className={classNames(
-        'block w-full border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:outline-none focus:ring-0 h-10',
+        'block w-full border border-gray-300 bg-gray-50 py-md px-sm text-gray-900 focus:outline-none focus:ring-0 h-10',
         className
       )}
       {...otherFields}

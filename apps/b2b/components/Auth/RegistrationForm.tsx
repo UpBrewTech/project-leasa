@@ -55,11 +55,9 @@ const RegistrationForm = () => {
   if (isSuccess) {
     return (
       <div className="text-center">
-        <div className="mb-4">
-          <Typography as="h2" variant="title-section">
-            Success!
-          </Typography>
-        </div>
+        <Typography as="h2" variant="title-section" className="mb-xs">
+          Success!
+        </Typography>
         <Link href="/auth/login">
           <Button>Login</Button>
         </Link>

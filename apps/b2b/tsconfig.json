@@ -1,6 +1,9 @@
 {
+  "display": "B2B Next.js",
   "extends": "tsconfig/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
-  "compilerOptions": { "baseUrl": "." }
+  "exclude": ["node_modules"]
 }

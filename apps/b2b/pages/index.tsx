@@ -6,12 +6,10 @@ import { AppPage } from './_app'
 
 const B2B: AppPage = () => {
   return (
-    <div className="w-full bg-white p-8 text-center shadow-sm sm:w-96">
-      <div className="mb-6">
-        <Typography as="h1" variant="title-page">
-          Leasa Portal
-        </Typography>
-      </div>
+    <div className="p-md w-full bg-white text-center shadow-sm sm:w-96">
+      <Typography as="h1" variant="title-page" className="mb-xs">
+        Leasa Portal
+      </Typography>
 
       <Link href="/auth/login">
         <Button>Login</Button>

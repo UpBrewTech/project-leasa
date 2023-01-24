@@ -5,6 +5,7 @@ declare module 'next-auth/jwt' {
   interface JWT {
     sub: string
     exp: number
+    iat?: number
     'https://hasura.io/jwt/claims': HasuraClaim
   }
 }

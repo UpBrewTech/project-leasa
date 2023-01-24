@@ -53,10 +53,10 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     ],
     jwt: {
       maxAge: MAX_AGE,
-      encode: async ({ token, secret, maxAge }) => {
+      encode: async ({ token, secret }) => {
         const jwtToken = {
           ...token,
-          exp: computeTokenExpiration({ exp: token?.exp, maxAge }),
+          exp: Math.floor(Date.now() / 1000) + MAX_AGE,
         }
 
         const encodedToken = jwt.sign(jwtToken, secret, { algorithm: 'HS256' })
@@ -120,19 +120,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       error: '404',
     },
   })
-}
-
-const computeTokenExpiration = ({
-  exp,
-  maxAge = MAX_AGE,
-}: {
-  exp?: number
-  maxAge?: number
-}) => {
-  const now = Math.floor(Date.now() / 1000)
-  if (!exp) return now + maxAge
-
-  return exp > now ? now + maxAge : exp
 }
 
 const GET_USER_WITH_CREDENTIALS = `
