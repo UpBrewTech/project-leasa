@@ -11,7 +11,7 @@ sequenceDiagram
     O->>S: [start] creates a rental unit
     activate S
     O->>S: find me a tenant
-    S-->>O: verify listing details
+    S--)O: verify listing details
     deactivate S
     O->>S: approves
     activate S
@@ -20,7 +20,7 @@ sequenceDiagram
 
     A->>S: applies to listing
     activate S
-    S->>O: notify
+    S-)O: notify
     deactivate S
     O-->>S: accept and verify contract details
     activate S
