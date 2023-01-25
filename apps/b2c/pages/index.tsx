@@ -1,9 +1,7 @@
-import { signOut, useSession } from 'next-auth/react'
 import { Button } from 'ui/components/Button'
 import { Typography } from 'ui/components/Typography'
 
 export default function B2B() {
-  const session = useSession()
   return (
     <div>
       <div
@@ -36,15 +34,6 @@ export default function B2B() {
           </div>
         </div>
       </div>
-      {session.status === 'authenticated' && (
-        <button
-          onClick={() => {
-            signOut()
-          }}
-        >
-          sign out
-        </button>
-      )}
     </div>
   )
 }
