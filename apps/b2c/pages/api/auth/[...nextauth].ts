@@ -4,8 +4,6 @@ import NextAuth, { Awaitable, Session, User } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import EmailProvider from 'next-auth/providers/email'
-import FacebookProvider from 'next-auth/providers/facebook'
-import GoogleProvider from 'next-auth/providers/google'
 import { asyncSSRFetch } from 'utils/asyncSSRFetch'
 import HasuraAdapter from 'utils/HasuraAdapter'
 
@@ -21,21 +19,13 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         server: process.env.EMAIL_SERVER!,
         from: process.env.EMAIL_FROM!,
       }),
-      GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID!,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      }),
-      FacebookProvider({
-        clientId: process.env.FACEBOOK_CLIENT_ID!,
-        clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
-      }),
       CredentialsProvider({
         name: 'Credentials',
         credentials: {
-          username: {
-            label: 'Username',
+          identifier: {
+            label: 'Identifier',
             type: 'text',
-            placeholder: 'Username',
+            placeholder: 'Identifier',
           },
           password: {
             label: 'Password',
@@ -44,12 +34,12 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
           },
         },
         authorize: async (credentials) => {
-          const { username, password } = credentials || {}
+          const { identifier, password } = credentials || {}
 
           const data = await asyncSSRFetch<{ authenticate: User }>({
             query: GET_USER_WITH_CREDENTIALS,
             variables: {
-              username,
+              identifier,
               password,
             },
           })
@@ -63,10 +53,10 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     ],
     jwt: {
       maxAge: MAX_AGE,
-      encode: async ({ token, secret, maxAge }) => {
+      encode: async ({ token, secret }) => {
         const jwtToken = {
           ...token,
-          exp: setTokenExpiration({ exp: token?.exp, maxAge }),
+          exp: Math.floor(Date.now() / 1000) + MAX_AGE,
         }
 
         const encodedToken = jwt.sign(jwtToken, secret, { algorithm: 'HS256' })
@@ -132,22 +122,9 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   })
 }
 
-const setTokenExpiration = ({
-  exp,
-  maxAge = MAX_AGE,
-}: {
-  exp?: number
-  maxAge?: number
-}) => {
-  const now = Math.floor(Date.now() / 1000)
-  if (!exp) return now + maxAge
-
-  return exp > now ? now + maxAge : exp
-}
-
 const GET_USER_WITH_CREDENTIALS = `
-  query Authentication($username: String!, $password: String!) {
-    authenticate(args: { username: $username, password: $password }) {
+  query Authentication($identifier: String!, $password: String!) {
+    authenticate(args: { identifier: $identifier, password: $password }) {
       id
       name
       email

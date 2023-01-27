@@ -79,8 +79,8 @@ importers:
     specifiers:
       '@apollo/client': ^3.7.3
       '@babel/core': ^7.0.0
+      '@hookform/resolvers': ^2.9.10
       '@types/jsonwebtoken': ^9.0.0
-      '@types/lodash': ^4.14.191
       '@types/node': 18.11.3
       '@types/react': 18.0.21
       '@types/react-dom': 18.0.6
@@ -92,37 +92,39 @@ importers:
       graphql: 15.8.0
       graphql-ws: ^5.11.2
       jsonwebtoken: ^9.0.0
-      lodash: ^4.17.21
       next: 13.0.0
       next-auth: ^4.18.8
       nodemailer: ^6.8.0
       postcss: ^8.4.18
       react: 18.2.0
       react-dom: 18.2.0
+      react-hook-form: ^7.42.1
       tailwindcss: ^3.2.4
       tsconfig: workspace:*
       twconfig: workspace:*
       typescript: 4.9.4
       ui: workspace:*
       utils: workspace:*
+      yup: ^0.32.11
     dependencies:
       '@apollo/client': 3.7.4_gx7iz7m2buhjkttyrgqpt34fdm
+      '@hookform/resolvers': 2.9.10_react-hook-form@7.42.1
       classnames: 2.3.2
       graphql: 15.8.0
       graphql-ws: 5.11.2_graphql@15.8.0
       jsonwebtoken: 9.0.0
-      lodash: 4.17.21
       next: 13.0.0_pjwopsidmaokadturxaafygjp4
       next-auth: 4.18.8_ddf7nqhf4krd45h2feh5wbeog4
       nodemailer: 6.9.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-hook-form: 7.42.1_react@18.2.0
       ui: link:../../packages/ui
       utils: link:../../packages/utils
+      yup: 0.32.11
     devDependencies:
       '@babel/core': 7.20.12
       '@types/jsonwebtoken': 9.0.1
-      '@types/lodash': 4.14.191
       '@types/node': 18.11.3
       '@types/react': 18.0.21
       '@types/react-dom': 18.0.6
