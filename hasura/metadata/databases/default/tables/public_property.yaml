@@ -1,0 +1,36 @@
+table:
+  name: property
+  schema: public
+insert_permissions:
+  - role: USER
+    permission:
+      check: {}
+      set:
+        owner_id: x-hasura-User-Id
+      columns:
+        - description
+        - name
+select_permissions:
+  - role: USER
+    permission:
+      columns:
+        - active
+        - created_at
+        - description
+        - id
+        - name
+        - updated_at
+      filter:
+        owner_id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: USER
+    permission:
+      columns:
+        - active
+        - description
+        - name
+      filter:
+        owner_id:
+          _eq: X-Hasura-User-Id
+      check: null
