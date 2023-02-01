@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { PropsWithChildren } from 'react'
-import { Button } from 'ui/components/Button'
-import { Sidebar } from 'ui/components/Sidebar'
+import { Sidebar, SidebarLink } from 'ui/components/Sidebar'
 import { Typography } from 'ui/components/Typography'
 
 export default {
@@ -36,42 +35,32 @@ const StoryWrapper: React.FC<PropsWithChildren> = ({ children }) => (
 
 export const Default = Template.bind({})
 Default.args = {
-  variant: 'primary',
+  alternative: false,
   children: (
     <>
-      <Typography as="h2" variant="title-section">
+      <Typography as="h2" variant="title-section" className="text-center p-4">
         sidebar content
       </Typography>
-      <Button size="small" variant="text">
-        Menu 1
-      </Button>
-      <Button size="small" variant="text">
-        Menu 2
-      </Button>
-      <Button size="small" variant="text">
-        Menu 3
-      </Button>
+      <SidebarLink href="#" isActive text="Sidebar Link 1" />
+      <SidebarLink href="#" text="Sidebar Link 2" />
+      <SidebarLink href="#" text="Sidebar Link 3" />
+      <SidebarLink href="#" text="Sidebar Link 4" />
     </>
   ),
 }
 
-export const VariantSecondary = Template.bind({})
-VariantSecondary.args = {
-  variant: 'secondary',
+export const Alternative = Template.bind({})
+Alternative.args = {
+  alternative: true,
   children: (
     <>
-      <Typography as="h2" variant="title-section">
+      <Typography as="h2" variant="title-section" className="text-center p-4">
         sidebar content
       </Typography>
-      <Button size="small" variant="text">
-        Menu 1
-      </Button>
-      <Button size="small" variant="text">
-        Menu 2
-      </Button>
-      <Button size="small" variant="text">
-        Menu 3
-      </Button>
+      <SidebarLink href="#" isActive text="Sidebar Link 1" />
+      <SidebarLink href="#" text="Sidebar Link 2" />
+      <SidebarLink href="#" text="Sidebar Link 3" />
+      <SidebarLink href="#" text="Sidebar Link 4" />
     </>
   ),
 }
