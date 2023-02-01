@@ -35,17 +35,43 @@ const StoryWrapper: React.FC<PropsWithChildren> = ({ children }) => (
 
 export const Default = Template.bind({})
 Default.args = {
-  alternative: false,
+  rounded: false,
   src: 'https://flowbite.com/docs/images/people/profile-picture-5.jpg',
 }
 
-export const Alternative = Template.bind({})
-Alternative.args = {
-  alternative: true,
+export const Rounded = Template.bind({})
+Rounded.args = {
+  rounded: true,
   src: 'https://flowbite.com/docs/images/people/profile-picture-5.jpg',
 }
 
-export const Placeholder = Template.bind({})
-Placeholder.args = {
-  alternative: false,
-}
+export const Sizes: ComponentStory<typeof Avatar> = () => (
+  <div
+    style={{
+      display: 'flex',
+      gap: '16px',
+    }}
+  >
+    <div>
+      <Avatar
+        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+        size="sm"
+      />
+    </div>
+    <div>
+      <Avatar
+        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+        size="md"
+      />
+    </div>
+    <div>
+      <Avatar
+        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+        size="lg"
+      />
+    </div>
+  </div>
+)
+
+export const MissingImage = Template.bind({})
+MissingImage.args = {}

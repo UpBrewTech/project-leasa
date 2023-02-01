@@ -1,20 +1,33 @@
 import classnames from 'classnames'
 import { IconPerson } from '../Icons'
 
+export type AvatarSize = 'sm' | 'md' | 'lg'
+
 export interface AvatarProps
   extends React.DetailedHTMLProps<
     React.ImgHTMLAttributes<HTMLImageElement>,
     HTMLImageElement
   > {
-  alternative?: boolean
+  rounded?: boolean
+  size?: AvatarSize
 }
 
-export const Avatar = ({ alternative, src, ...otherProps }: AvatarProps) => {
+export const Avatar = ({
+  rounded,
+  size = 'md',
+  src,
+  ...otherProps
+}: AvatarProps) => {
   return (
     <div
       className={classnames(
-        'h-full w-full overflow-hidden bg-slate-200',
-        alternative ? 'rounded' : 'rounded-full'
+        'overflow-hidden bg-slate-200',
+        rounded ? 'rounded-full' : 'rounded',
+        {
+          'h-10 w-10': size === 'sm',
+          'h-12 w-12': size === 'md',
+          'h-14 w-14': size === 'lg',
+        }
       )}
     >
       {src ? (
