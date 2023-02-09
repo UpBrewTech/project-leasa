@@ -19,6 +19,7 @@ export const Button = ({
   wide = false,
   variant = 'primary',
   size = 'regular',
+  type = 'button',
   danger,
   children,
   className,
@@ -29,7 +30,7 @@ export const Button = ({
   const isDisabled = disabled || loading
   return (
     <button
-      type="button"
+      type={type}
       disabled={disabled || loading}
       className={classnames(
         'relative',
