@@ -1,30 +1,32 @@
 import dynamic from 'next/dynamic'
-import { PropsWithChildren, useLayoutEffect } from 'react'
+import { PropsWithChildren } from 'react'
 import { createPortal } from 'react-dom'
 
 interface Props extends PropsWithChildren {
-  elementId: string
+  id: string
+  onOverlayClick?: (event: React.SyntheticEvent) => void
   className?: string
 }
 
-const Portal = ({ children, elementId, className }: Props) => {
-  const element = document.createElement('div')
-  element.setAttribute('id', elementId)
-  element.setAttribute('class', className ? className : '')
+const Portal = ({ id, className, onOverlayClick, children }: Props) => {
+  const handleOverlayClick = (event: React.SyntheticEvent) => {
+    onOverlayClick && onOverlayClick(event)
+  }
 
-  useLayoutEffect(() => {
-    if (!document.getElementById(elementId)) {
-      document.body.appendChild(element)
-    }
-
-    return () => {
-      if (document.getElementById(elementId)) {
-        element.remove()
-      }
-    }
-  }, [elementId, element])
-
-  return createPortal(children, element)
+  return (
+    <>
+      {createPortal(
+        <div
+          id={id}
+          className={className && className}
+          onClick={handleOverlayClick}
+        >
+          {children}
+        </div>,
+        document.body
+      )}
+    </>
+  )
 }
 
 export default dynamic(() => Promise.resolve(Portal), { ssr: false })
