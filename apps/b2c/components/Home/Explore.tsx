@@ -61,7 +61,7 @@ export const Explore = () => {
       <Typography className="mb-md" variant="title-section" as="h4">
         Explore
       </Typography>
-      <div className="grid grid-cols-2 md:grid-cols-12 gap-lg grid-temp">
+      <div className="gap-lg grid-temp grid grid-cols-2 md:grid-cols-12">
         {mockData.map((data, index) => (
           <div className={getGridClasses(index)}>
             <Card

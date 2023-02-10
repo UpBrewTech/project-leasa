@@ -3,17 +3,17 @@ import { Typography } from 'ui/components/Typography'
 
 export const Discover = () => {
   return (
-    <section className="text-center max-w-lg mx-auto my-xl">
+    <section className="my-xl mx-auto max-w-lg text-center">
       <Typography
         as="h2"
-        className="text-purple-600 mb-md italic"
+        className="mb-md italic text-purple-600"
         variant="title-section"
       >
         Discover
       </Typography>
       <Typography
         as="h3"
-        className="text-gray-600 italic mb-md"
+        className="mb-md italic text-gray-600"
         variant="paragraph-large"
       >
         {`We've handpicked Iloilo's very best rental homes. Start picking your dream home now!`}
