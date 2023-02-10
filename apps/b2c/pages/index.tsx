@@ -9,7 +9,7 @@ export default function Home() {
     <main>
       <StickyHeader profile={<Avatar rounded size="sm" />} />
       <Hero />
-      <div className="px-sm md:px-lg max-w-5xl mx-auto">
+      <div className="px-sm md:px-lg mx-auto max-w-5xl">
         <Discover />
         <Explore />
       </div>

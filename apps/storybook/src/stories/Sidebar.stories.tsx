@@ -38,7 +38,7 @@ Default.args = {
   alternative: false,
   children: (
     <>
-      <Typography as="h2" variant="title-section" className="text-center p-4">
+      <Typography as="h2" variant="title-section" className="p-4 text-center">
         sidebar content
       </Typography>
       <SidebarLink href="#" isActive text="Sidebar Link 1" />
@@ -54,7 +54,7 @@ Alternative.args = {
   alternative: true,
   children: (
     <>
-      <Typography as="h2" variant="title-section" className="text-center p-4">
+      <Typography as="h2" variant="title-section" className="p-4 text-center">
         sidebar content
       </Typography>
       <SidebarLink href="#" isActive text="Sidebar Link 1" />
