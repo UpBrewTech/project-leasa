@@ -24,7 +24,7 @@ export const Avatar = ({
         'overflow-hidden bg-slate-200',
         rounded ? 'rounded-full' : 'rounded',
         {
-          'h-10 w-10': size === 'sm',
+          'h-8 w-8': size === 'sm',
           'h-12 w-12': size === 'md',
           'h-14 w-14': size === 'lg',
         }
