@@ -4,12 +4,13 @@ import { PropsWithChildren } from 'react'
 import { createPortal } from 'react-dom'
 
 interface Props extends PropsWithChildren {
+  id: string
   isOpen: boolean
   onClose: VoidFunction
   className?: string
 }
 
-const Modal = ({ isOpen, onClose, className, children }: Props) => {
+const Modal = ({ id, isOpen, onClose, className, children }: Props) => {
   const handleOverlayClick = (event: React.SyntheticEvent) => {
     if (event.currentTarget === event.target) onClose()
   }
@@ -18,7 +19,7 @@ const Modal = ({ isOpen, onClose, className, children }: Props) => {
 
   return createPortal(
     <div
-      id="modal-portal"
+      id={`${id}-modal`}
       className="fixed top-0 left-0 z-50 flex h-screen w-screen items-center justify-center overflow-hidden bg-gray-900/75"
       onClick={handleOverlayClick}
     >
