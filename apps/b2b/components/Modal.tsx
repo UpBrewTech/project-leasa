@@ -1,7 +1,7 @@
 import classNames from 'classnames'
-import Portal from 'components/Portal'
 import dynamic from 'next/dynamic'
 import { PropsWithChildren } from 'react'
+import { createPortal } from 'react-dom'
 
 interface Props extends PropsWithChildren {
   isOpen: boolean
@@ -16,16 +16,17 @@ const Modal = ({ isOpen, onClose, className, children }: Props) => {
 
   if (!isOpen) return null
 
-  return (
-    <Portal
+  return createPortal(
+    <div
       id="modal-portal"
       className="fixed top-0 left-0 z-50 flex h-screen w-screen items-center justify-center overflow-hidden bg-gray-900/75"
-      onOverlayClick={handleOverlayClick}
+      onClick={handleOverlayClick}
     >
       <div className={classNames('relative bg-white shadow', className)}>
         {children}
       </div>
-    </Portal>
+    </div>,
+    document.body
   )
 }
 
