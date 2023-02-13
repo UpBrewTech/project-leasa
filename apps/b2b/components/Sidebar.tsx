@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import Link from 'next/link'
 import { PropsWithChildren, ReactElement } from 'react'
 
 export type SidebarVariant = 'primary' | 'secondary'
@@ -33,15 +34,16 @@ export const SidebarLink = ({
   isActive,
 }: SidebarLinkProps) => {
   return (
-    <a
-      href={href}
-      className={classnames(
-        'p-sm flex w-full items-center gap-4 hover:bg-gray-100',
-        isActive && 'bg-gray-100'
-      )}
-    >
-      {icon && <span className="w-8">{icon}</span>}
-      <span>{text}</span>
-    </a>
+    <Link href={href}>
+      <a
+        className={classnames(
+          'p-sm flex w-full items-center gap-4 hover:bg-gray-100',
+          isActive && 'bg-gray-100'
+        )}
+      >
+        {icon && <span className="w-8">{icon}</span>}
+        {text}
+      </a>
+    </Link>
   )
 }
