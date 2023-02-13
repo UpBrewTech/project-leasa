@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { PropsWithChildren } from 'react'
+import { Avatar } from 'ui/components/Avatar'
 import { Button } from 'ui/components/Button'
 import { StickyHeader } from 'ui/components/StickyHeader'
 
@@ -44,6 +45,7 @@ const StoryWrapper: React.FC<PropsWithChildren> = ({ children }) => (
 
 export const Default = Template.bind({})
 Default.args = {
+  profile: <Avatar size="sm" rounded />,
   alternative: false,
   children: (
     <>
@@ -62,6 +64,7 @@ Default.args = {
 
 export const AlternativeMode = Template.bind({})
 AlternativeMode.args = {
+  profile: <Avatar size="sm" />,
   alternative: true,
   children: (
     <>

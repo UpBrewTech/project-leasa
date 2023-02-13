@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { Button } from 'ui/components/Button'
 import { Typography } from 'ui/components/Typography'
 import { PanelLayout } from 'ui/Layouts/Panel'
-import { AppPage } from './_app'
 
 const B2B: AppPage = () => {
   return (

@@ -32,14 +32,14 @@ export const Typography = <T extends React.ElementType = 'span'>({
     <Component
       className={classnames('font-inter', className, {
         'text-5xl font-medium leading-tight': variant === 'title-page',
-        'text-xl font-medium leading-7': variant === 'title-section',
-        'text-base font-bold leading-6': variant === 'title-subsection',
-        'text-base font-normal leading-6': variant === 'paragraph-large',
-        'text-sm font-normal leading-6': variant === 'paragraph-medium',
+        'text-3xl font-medium leading-10': variant === 'title-section',
+        'text-2xl font-bold leading-10': variant === 'title-subsection',
+        'text-2xl font-normal leading-8': variant === 'paragraph-large',
+        'text-base font-normal leading-6': variant === 'paragraph-medium',
         'text-xs font-normal leading-5': variant === 'paragraph-small',
-        'text-base font-medium leading-6': variant === 'label-large',
-        'text-sm font-medium leading-5': variant === 'label-medium',
-        'text-xs font-medium leading-4': variant === 'label-small',
+        'text-2xl font-medium leading-8': variant === 'label-large',
+        'text-xl font-medium leading-6': variant === 'label-medium',
+        'text-xs font-medium leading-5': variant === 'label-small',
       })}
       {...props}
     />

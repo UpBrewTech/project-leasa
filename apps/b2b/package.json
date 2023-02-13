@@ -16,6 +16,7 @@
     "graphql": "15.8.0",
     "graphql-ws": "^5.11.2",
     "jsonwebtoken": "^9.0.0",
+    "@heroicons/react": "^2.0.13",
     "next": "13.0.0",
     "next-auth": "^4.18.8",
     "nodemailer": "^6.8.0",

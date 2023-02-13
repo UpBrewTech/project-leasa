@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
 
 export interface StickyHeaderProps
   extends React.DetailedHTMLProps<
@@ -8,12 +8,14 @@ export interface StickyHeaderProps
     >,
     PropsWithChildren {
   alternative?: boolean
+  profile?: ReactNode
 }
 
 export const StickyHeader = ({
   children,
   alternative,
   className,
+  profile,
   ...otherProps
 }: StickyHeaderProps) => {
   return (
@@ -22,6 +24,7 @@ export const StickyHeader = ({
         'align-between sticky top-0 left-0 flex w-full items-center',
         'px-md py-sm',
         'shadow-md',
+        'z-40',
         alternative ? 'bg-purple-600 text-white' : 'bg-white text-purple-600',
         className
       )}
@@ -29,7 +32,7 @@ export const StickyHeader = ({
     >
       <div className="shrink-0">Logo</div>
       <div className="grow text-right">{children}</div>
-      <div className="ml-sm shrink-0">Avatar</div>
+      <div className="ml-sm shrink-0">{profile}</div>
     </header>
   )
 }
