@@ -3,8 +3,6 @@ import { Button } from 'ui/components/Button'
 import { Typography } from 'ui/components/Typography'
 import { PanelLayout } from 'ui/Layouts/Panel'
 
-import { AppPage } from './_app'
-
 const Dashboard: AppPage = () => {
   return (
     <div className="p-md w-full bg-white text-center shadow-sm sm:w-96">

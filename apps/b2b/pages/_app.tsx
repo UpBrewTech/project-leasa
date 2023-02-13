@@ -1,16 +1,9 @@
 import ApolloClientProvider from 'components/ApolloClientProvider'
 import PageAuth from 'components/PageAuth'
-import { NextPage } from 'next'
 import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { PropsWithChildren } from 'react'
 import '../styles/globals.css'
-
-export type AppPage = NextPage & {
-  getLayout?: React.FC<PropsWithChildren>
-  allowedRoles?: Role[]
-}
 
 interface Props extends AppProps {
   Component: AppPage
