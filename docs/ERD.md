@@ -1,4 +1,4 @@
-* This document is still in active development
+- This document is still in active development
 
 ```mermaid
 erDiagram
@@ -44,4 +44,71 @@ erDiagram
     CONTRACT }|--|| TERM : "one of"
     CUSTOMER ||--o{ CONTRACT : "signs"
     CUSTOMER |o--|{ STATEMENT : "fulfills"
+```
+
+---
+
+### Property & Rental Rates
+
+```mermaid
+erDiagram
+
+PROPERTY {
+    uuid id PK
+    text name
+    text description
+    uuid owner_id FK "user.id"
+    timestamp created_at
+    timestamp updated_at
+}
+
+PROPERTY_RATES {
+    serial id PK
+    uuid property_id FK "property.id"
+    enum type FK "property_rate_types.key"
+    text description
+    integer amount
+    boolean enable
+    timestamp created_at
+    timestamp updated_at
+}
+
+PROPERTY_RATE_TYPES {
+    text key PK
+    text description
+}
+
+types {
+    text daily
+    text weekly
+    text monthly
+    text yearly
+}
+
+OWNER ||--o{ PROPERTY : owns
+PROPERTY ||--o{ PROPERTY_RATES : "has"
+PROPERTY_RATES ||--|| types : "for"
+PROPERTY_RATE_TYPES }|--|{ types : "are"
+```
+
+### Tenant Invite and Contact
+
+```mermaid
+erDiagram
+
+INVITES {
+    uuid id PK
+    timestamp created_at
+    timestamp updated_at
+}
+
+CONTACT {
+    uuid id PK
+    timestamp created_at
+    timestamp updated_at
+}
+
+
+PROPERTY }o--o{ INVITES : "has"
+CONTACT ||--|| INVITES : "has"
 ```
