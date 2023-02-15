@@ -32,15 +32,18 @@ export const Default: ComponentStory<typeof Stepper> = (args: StepperProps) => {
         <Typography as="h2" variant="title-section" className="mb-sm">
           Step 2
         </Typography>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi illo
-        eligendi inventore provident atque saepe fuga temporibus vel id porro!
+        Dolor dicta earum odio suscipit nihil accusamus totam. Similique
+        perspiciatis modi aperiam. Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Excepturi illo eligendi inventore provident atque
+        saepe fuga temporibus vel id porro!
       </Step>
       <Step>
         <Typography as="h2" variant="title-section" className="mb-sm">
           Step 3
         </Typography>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi illo
-        eligendi inventore provident atque saepe fuga temporibus vel id porro!
+        Excepturi illo eligendi inventore provident atque saepe fuga temporibus
+        vel id porro! Similique est incidunt illo distinctio quidem
+        perspiciatis?
       </Step>
     </Stepper>
   )

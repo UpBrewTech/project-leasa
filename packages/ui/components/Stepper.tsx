@@ -9,16 +9,28 @@ interface ProgressBarProps {
 
 const ProgressBar = ({ currentStep, totalSteps }: ProgressBarProps) => {
   const percentage = Math.floor((currentStep / totalSteps) * 100)
-  return <div>{percentage}%</div>
+  return (
+    <div className="absolute flex h-full w-full items-center justify-start">
+      <div
+        className="bg-purple-700"
+        style={{ height: '2px', width: percentage + '%' }}
+      ></div>
+    </div>
+  )
 }
 
 interface NavProps extends Omit<StepperProps, 'dispatch'> {
   onClick: (step: number) => void
 }
+
 const Nav = ({ active, onClick, children }: NavProps) => {
   return (
     <div className="mb-sm relative">
-      <ol className="flex w-full items-center justify-evenly">
+      <ProgressBar
+        currentStep={Number(active + 1)}
+        totalSteps={Children.count(children)}
+      />
+      <ol className="relative z-10 flex w-full items-center justify-evenly">
         {Children.map(children, (step, key) => {
           return (
             <li>
@@ -36,10 +48,6 @@ const Nav = ({ active, onClick, children }: NavProps) => {
           )
         })}
       </ol>
-      <ProgressBar
-        currentStep={Number(active + 1)}
-        totalSteps={Children.count(children)}
-      />
     </div>
   )
 }
@@ -50,6 +58,7 @@ interface FooterButtonsProps {
   onClickNext: () => void
   onClickPrev: () => void
 }
+
 const FooterButtons = ({
   currentStep,
   totalSteps,
