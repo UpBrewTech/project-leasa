@@ -30,7 +30,7 @@ const Nav = ({ active, onClick, children }: NavProps) => {
         currentStep={Number(active + 1)}
         totalSteps={Children.count(children)}
       />
-      <ol className="relative z-10 flex w-full items-center justify-evenly">
+      <ol className="relative z-10 flex w-full items-center justify-around">
         {Children.map(children, (step, key) => {
           return (
             <li>
@@ -66,7 +66,7 @@ const FooterButtons = ({
   onClickPrev,
 }: FooterButtonsProps) => {
   return (
-    <div className="pt-sm mt-sm flex w-full items-center justify-end gap-4 border-t">
+    <div className="mt-sm flex w-full items-center justify-end gap-4">
       {currentStep !== 1 && <Button onClick={onClickPrev}>Prev</Button>}
       {currentStep !== totalSteps ? (
         <Button onClick={onClickNext}>Next</Button>
