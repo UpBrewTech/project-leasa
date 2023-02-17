@@ -1,6 +1,5 @@
 import classnames from 'classnames'
-import { Children, PropsWithChildren, useCallback } from 'react'
-import { Button } from './Button'
+import { Children, PropsWithChildren, useCallback, useState } from 'react'
 
 interface ProgressBarProps {
   currentStep: number
@@ -34,45 +33,18 @@ const Nav = ({ active, onClick, children }: NavProps) => {
         {Children.map(children, (step, key) => {
           return (
             <li>
-              <button
-                type="button"
+              <span
                 className={classnames(
                   'flex h-10 w-10 items-center justify-center rounded-full font-bold',
                   key <= active ? 'bg-purple-600 text-white' : 'bg-gray-100'
                 )}
-                onClick={() => onClick(key)}
               >
                 {key + 1}
-              </button>
+              </span>
             </li>
           )
         })}
       </ol>
-    </div>
-  )
-}
-
-interface FooterButtonsProps {
-  currentStep: number
-  totalSteps: number
-  onClickNext: () => void
-  onClickPrev: () => void
-}
-
-const FooterButtons = ({
-  currentStep,
-  totalSteps,
-  onClickNext,
-  onClickPrev,
-}: FooterButtonsProps) => {
-  return (
-    <div className="mt-sm flex w-full items-center justify-end gap-4">
-      {currentStep !== 1 && <Button onClick={onClickPrev}>Prev</Button>}
-      {currentStep !== totalSteps ? (
-        <Button onClick={onClickNext}>Next</Button>
-      ) : (
-        <Button>Done</Button>
-      )}
     </div>
   )
 }
@@ -85,38 +57,50 @@ export const Step = ({ children }: StepProps) => {
 
 export interface StepperProps extends PropsWithChildren {
   active: number
-  dispatch: React.Dispatch<React.SetStateAction<number>>
+  onNav: (step: number) => void
 }
 
 export const Stepper: React.FC<StepperProps> = (props) => {
-  const { active, dispatch, children } = props
+  const { active, onNav, children } = props
   const steps = Children.toArray(children)
-
-  const handleNextClick = useCallback(() => {
-    dispatch((current) => Number(current + 1))
-  }, [dispatch])
-
-  const handlePrevClick = useCallback(() => {
-    dispatch((current) => Number(current - 1))
-  }, [dispatch])
-
-  const handleNavClick = useCallback(
-    (step: number) => {
-      dispatch(step)
-    },
-    [dispatch]
-  )
 
   return (
     <div className="h-auto w-full">
-      <Nav onClick={handleNavClick} {...props} />
+      <Nav onClick={onNav} {...props} />
       {steps[active]}
-      <FooterButtons
-        currentStep={Number(active + 1)}
-        totalSteps={Children.count(children)}
-        onClickNext={handleNextClick}
-        onClickPrev={handlePrevClick}
-      />
     </div>
   )
+}
+
+interface UseStepperProps {
+  defaultActiveStep?: number
+}
+
+export const useStepper = (props: UseStepperProps) => {
+  const { defaultActiveStep = 0 } = props
+  const [step, setStep] = useState(defaultActiveStep)
+
+  const handleNext = useCallback(() => {
+    setStep((current) => Number(current + 1))
+  }, [setStep])
+
+  const handlePrev = useCallback(() => {
+    setStep((current) => Number(current - 1))
+  }, [setStep])
+
+  const handleNav = useCallback(
+    (step: number) => {
+      setStep(step)
+    },
+    [setStep]
+  )
+
+  return {
+    stepperProps: {
+      active: step,
+      onNav: handleNav,
+    },
+    onNext: handleNext,
+    onPrev: handlePrev,
+  }
 }
