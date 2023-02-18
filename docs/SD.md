@@ -55,7 +55,7 @@ sequenceDiagram
 
 ---
 
-### Tenant Invite and Contract
+### Tenant Invite
 
 After setting up a Property; owners can
 
@@ -66,10 +66,10 @@ After setting up a Property; owners can
   - body
     - `{owner.name}` has invited you to `{property.name}`
     - include property details
-    - include enabled property_rate
+    - include enabled/selected property_rate
     - include "Accept" or "Decline" button
 
-**Invite Sequence (owner-and-tenant)**
+**Tenant Invite Sequence**
 
 ```mermaid
 sequenceDiagram
@@ -78,33 +78,26 @@ sequenceDiagram
     actor T as TENANT
 
     activate O
-    %% alt pre existing tenants
-    %%     Note left of O: has just added a Property
-    %%     O->>S: send a tenant invite
-    %% else new tenants
-    %%     Note left of O: has an existing listing
-    %%     O->>S: accept a listing applicant
-    %% end
-    Note left of O: has just added a Property
     O->>S: send a tenant invite
     activate S
-    O-)S: defines the rental details
-    S-)S: create contract
-    S-)T: send Invite Email with Rental Details
+    NOTE right of O: with selected Property and Rental Rate
+    S-)S: create email
+    S-)T: send Invite Email
+    NOTE right of S: Property Details and Rental Rate
     S--)O: sent invite notification
     deactivate O
     deactivate S
 
-    activate T
-    T-->>S: accept invite
-    activate S
-    alt unregistered user
-        S-)T: redirects user to /auth/registration
-        T-->>S: successfully registered
-    end
-    S-)S: updates contract
-    S-)O: successful contact notification
-    S-)T: successful contact notification
-    deactivate S
-    deactivate T
+    %% activate T
+    %% T-->>S: accept invite
+    %% activate S
+    %% alt unregistered user
+    %%     S-)T: redirects user to /auth/registration
+    %%     T-->>S: successfully registered
+    %% end
+    %% S-)S: updates contract
+    %% S--)O: successful contact notification
+    %% S--)T: successful contact notification
+    %% deactivate S
+    %% deactivate T
 ```

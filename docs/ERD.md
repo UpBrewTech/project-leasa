@@ -63,7 +63,7 @@ PROPERTY {
 }
 
 PROPERTY_RATES {
-    serial id PK
+    int id PK
     uuid property_id FK "property.id"
     enum type FK "property_rate_types.key"
     text description
@@ -91,24 +91,35 @@ PROPERTY_RATES ||--|| types : "for"
 PROPERTY_RATE_TYPES }|--|{ types : "are"
 ```
 
-### Tenant Invite and Contact
+### Tenant Invite
 
 ```mermaid
 erDiagram
 
 INVITES {
     uuid id PK
+    uuid property_id FK "property.id"
+    int property_rate_id FK "property_rate.id"
+    sting email
+    enum status FK ""
     timestamp created_at
     timestamp updated_at
 }
 
-CONTACT {
-    uuid id PK
-    timestamp created_at
-    timestamp updated_at
+INVITE_STATUS {
+    text key PK
+    text description
+}
+
+status {
+    text pending
+    text accepted
+    text rejected
 }
 
 
-PROPERTY }o--o{ INVITES : "has"
-CONTACT ||--|| INVITES : "has"
+OWNER ||--o| INVITES: "sends an"
+PROPERTY ||--|| INVITES : "is included"
+INVITES ||--|| status : "will be"
+status }|--|{ INVITE_STATUS : "are"
 ```
