@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
 } from 'react'
+import { Button } from './Button'
 import { Typography } from './Typography'
 
 interface ProgressBarProps {
@@ -28,16 +29,16 @@ const ProgressBar = ({ currentStep, totalSteps }: ProgressBarProps) => {
   )
 }
 
-type NavProps = StepperProps
+type NavProps = Omit<StepperProps, 'hideFooter' | 'onNext' | 'onPrev'>
 
 const Nav = ({ active, activeSteps, onNav, children }: NavProps) => {
   return (
     <div className="mb-sm relative">
       <ProgressBar
-        currentStep={Number(active + 1)}
-        totalSteps={Children.count(children)}
+        currentStep={active}
+        totalSteps={Children.count(children) - 1}
       />
-      <ol className="relative z-10 flex w-full items-center justify-around">
+      <ol className="relative z-10 flex w-full items-center justify-between">
         {Children.map(children, (step, key) => {
           return (
             <li>
@@ -69,6 +70,29 @@ export const StepFooter = ({ children }: PropsWithChildren) => {
   )
 }
 
+type DefaultFooterProps = Omit<StepperProps, 'activeSteps' | 'onNav'>
+
+const DefaultFooter = ({
+  hideFooter,
+  active,
+  onNext,
+  onPrev,
+  children,
+}: DefaultFooterProps) => {
+  const totalSteps = Number(Children.count(children) - 1)
+
+  if (hideFooter) return null
+
+  return (
+    <StepFooter>
+      {!!active && <Button onClick={onPrev}>Prev</Button>}
+      <Button onClick={onNext}>
+        {active === totalSteps ? 'Done' : 'Next'}
+      </Button>
+    </StepFooter>
+  )
+}
+
 export interface StepProps
   extends HTMLAttributes<HTMLDivElement>,
     PropsWithChildren {
@@ -91,6 +115,9 @@ export interface StepperProps extends PropsWithChildren {
   active: number
   activeSteps: number
   onNav: (step: number) => void
+  hideFooter?: boolean
+  onNext: () => void
+  onPrev: () => void
 }
 
 export const Stepper: React.FC<StepperProps> = (props) => {
@@ -101,6 +128,7 @@ export const Stepper: React.FC<StepperProps> = (props) => {
     <div className="h-auto w-full">
       <Nav {...props} />
       {steps[active]}
+      <DefaultFooter {...props} />
     </div>
   )
 }
@@ -109,8 +137,8 @@ interface UseStepperProps {
   defaultActiveStep?: number
 }
 
-export const useStepper = (props: UseStepperProps) => {
-  const { defaultActiveStep = 0 } = props
+export const useStepper = (props?: UseStepperProps) => {
+  const { defaultActiveStep = 0 } = props ? props : {}
   const [step, setStep] = useState(defaultActiveStep)
   const ref = useRef(defaultActiveStep)
 
@@ -136,6 +164,8 @@ export const useStepper = (props: UseStepperProps) => {
     stepperProps: {
       active: step,
       activeSteps: ref.current,
+      onNext: handleNext,
+      onPrev: handlePrev,
       onNav: handleNav,
     },
     onNext: handleNext,
