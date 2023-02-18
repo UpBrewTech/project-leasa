@@ -1,7 +1,12 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { Button } from 'ui/components/Button'
-import { Step, Stepper, StepperProps, useStepper } from 'ui/components/Stepper'
-import { Typography } from 'ui/components/Typography'
+import {
+  Step,
+  StepFooter,
+  Stepper,
+  StepperProps,
+  useStepper,
+} from 'ui/components/Stepper'
 
 export default {
   title: 'Example/Stepper',
@@ -21,40 +26,43 @@ export const Default: ComponentStory<typeof Stepper> = (args: StepperProps) => {
 
   return (
     <Stepper {...stepperProps}>
-      <Step>
-        <Typography as="h2" variant="title-section" className="mb-sm">
-          Step 1
-        </Typography>
+      <Step title="Step 1">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi illo
         eligendi inventore provident atque saepe fuga temporibus vel id porro!
-        <div className="mt-sm flex w-full items-center justify-end gap-4">
+        <StepFooter>
           <Button onClick={onNext}>Next</Button>
-        </div>
+        </StepFooter>
       </Step>
-      <Step>
-        <Typography as="h2" variant="title-section" className="mb-sm">
-          Step 2
-        </Typography>
+      <Step title="Step 2">
         Dolor dicta earum odio suscipit nihil accusamus totam. Similique
         perspiciatis modi aperiam. Lorem ipsum dolor sit amet consectetur
         adipisicing elit. Excepturi illo eligendi inventore provident atque
         saepe fuga temporibus vel id porro!
-        <div className="mt-sm flex w-full items-center justify-end gap-4">
+        <StepFooter>
           <Button onClick={onPrev}>Prev</Button>
           <Button onClick={onNext}>Next</Button>
-        </div>
+        </StepFooter>
       </Step>
-      <Step>
-        <Typography as="h2" variant="title-section" className="mb-sm">
-          Step 3
-        </Typography>
+      <Step title="Step 3">
         Excepturi illo eligendi inventore provident atque saepe fuga temporibus
         vel id porro! Similique est incidunt illo distinctio quidem
         perspiciatis?
-        <div className="mt-sm flex w-full items-center justify-end gap-4">
+        <StepFooter>
+          <Button onClick={onPrev}>Prev</Button>
+          <Button onClick={onNext}>Next</Button>
+        </StepFooter>
+      </Step>
+      <Step title="Step 4">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus commodi
+        eum cumque quibusdam culpa saepe, suscipit voluptatibus laudantium in
+        similique inventore cum corrupti totam obcaecati optio eligendi
+        repudiandae nulla vero hic quo odio alias tempore ipsum aliquid. Quod
+        repellendus cumque unde. Voluptas nostrum illo ullam temporibus debitis
+        nemo voluptatum eos.
+        <StepFooter>
           <Button onClick={onPrev}>Prev</Button>
           <Button>Done</Button>
-        </div>
+        </StepFooter>
       </Step>
     </Stepper>
   )

@@ -1,5 +1,13 @@
 import classnames from 'classnames'
-import { Children, PropsWithChildren, useCallback, useState } from 'react'
+import {
+  Children,
+  HTMLAttributes,
+  PropsWithChildren,
+  useCallback,
+  useRef,
+  useState,
+} from 'react'
+import { Typography } from './Typography'
 
 interface ProgressBarProps {
   currentStep: number
@@ -10,19 +18,19 @@ const ProgressBar = ({ currentStep, totalSteps }: ProgressBarProps) => {
   const percentage = Math.floor((currentStep / totalSteps) * 100)
   return (
     <div className="absolute flex h-full w-full items-center justify-start">
-      <div
-        className="bg-purple-700"
-        style={{ height: '2px', width: percentage + '%' }}
-      ></div>
+      <div className="relative w-full bg-gray-100" style={{ height: '2px' }}>
+        <div
+          className="h-full bg-purple-700 transition-all duration-300"
+          style={{ width: percentage + '%' }}
+        ></div>
+      </div>
     </div>
   )
 }
 
-interface NavProps extends Omit<StepperProps, 'dispatch'> {
-  onClick: (step: number) => void
-}
+type NavProps = StepperProps
 
-const Nav = ({ active, onClick, children }: NavProps) => {
+const Nav = ({ active, activeSteps, onNav, children }: NavProps) => {
   return (
     <div className="mb-sm relative">
       <ProgressBar
@@ -33,14 +41,18 @@ const Nav = ({ active, onClick, children }: NavProps) => {
         {Children.map(children, (step, key) => {
           return (
             <li>
-              <span
+              <button
                 className={classnames(
-                  'flex h-10 w-10 items-center justify-center rounded-full font-bold',
-                  key <= active ? 'bg-purple-600 text-white' : 'bg-gray-100'
+                  'flex h-10 w-10 items-center justify-center rounded-full font-bold transition-all duration-300',
+                  key <= active ? 'bg-purple-600 text-white' : 'bg-gray-100',
+                  key <= activeSteps
+                    ? 'pointer-events-auto'
+                    : 'pointer-events-none'
                 )}
+                onClick={() => onNav(key)}
               >
                 {key + 1}
-              </span>
+              </button>
             </li>
           )
         })}
@@ -49,24 +61,45 @@ const Nav = ({ active, onClick, children }: NavProps) => {
   )
 }
 
-export type StepProps = PropsWithChildren
+export const StepFooter = ({ children }: PropsWithChildren) => {
+  return (
+    <div className="mt-sm flex w-full items-center justify-end gap-4">
+      {children}
+    </div>
+  )
+}
 
-export const Step = ({ children }: StepProps) => {
-  return <div className="w-full">{children}</div>
+export interface StepProps
+  extends HTMLAttributes<HTMLDivElement>,
+    PropsWithChildren {
+  title: string
+}
+
+export const Step = (props: StepProps) => {
+  const { title, className, children } = props
+  return (
+    <div className={classnames('w-full', className)}>
+      <Typography as="h2" variant="title-section" className="mb-sm">
+        {title}
+      </Typography>
+      {children}
+    </div>
+  )
 }
 
 export interface StepperProps extends PropsWithChildren {
   active: number
+  activeSteps: number
   onNav: (step: number) => void
 }
 
 export const Stepper: React.FC<StepperProps> = (props) => {
-  const { active, onNav, children } = props
+  const { active, children } = props
   const steps = Children.toArray(children)
 
   return (
     <div className="h-auto w-full">
-      <Nav onClick={onNav} {...props} />
+      <Nav {...props} />
       {steps[active]}
     </div>
   )
@@ -79,9 +112,13 @@ interface UseStepperProps {
 export const useStepper = (props: UseStepperProps) => {
   const { defaultActiveStep = 0 } = props
   const [step, setStep] = useState(defaultActiveStep)
+  const ref = useRef(defaultActiveStep)
 
   const handleNext = useCallback(() => {
-    setStep((current) => Number(current + 1))
+    setStep((current) => {
+      ref.current = Number(current + 1)
+      return Number(current + 1)
+    })
   }, [setStep])
 
   const handlePrev = useCallback(() => {
@@ -98,6 +135,7 @@ export const useStepper = (props: UseStepperProps) => {
   return {
     stepperProps: {
       active: step,
+      activeSteps: ref.current,
       onNav: handleNav,
     },
     onNext: handleNext,
