@@ -48,10 +48,13 @@ erDiagram
 
 ---
 
-### Entity Attributes
+### Property with Rental Settings
+
+- currently a property will only have 1 rental setup
 
 ```mermaid
 erDiagram
+
 PROPERTY {
     uuid id PK
     text name
@@ -61,59 +64,15 @@ PROPERTY {
     timestamp updated_at
 }
 
-```
-
-### Option 1: Property & Rental Rates
-
-```mermaid
-erDiagram
-
-PROPERTY_RATES {
+RENTAL_SETTINGS {
     int id PK
     uuid property_id FK "property.id"
-    enum type  "property_rate_types.key"
-    text description
-    integer amount
-    boolean enable
-    timestamp created_at
-    timestamp updated_at
-}
-
-PROPERTY_RATE_TYPES {
-    text key PK
-    text description
-}
-
-types {
-    text monthly
-}
-
-PROPERTY ||--|| PROPERTY_RATES : "has"
-PROPERTY_RATES ||--|| types : "for"
-PROPERTY_RATE_TYPES ||--|| types : "is"
-```
-
-### Option 2: Property with Rental Setting
-
-```mermaid
-erDiagram
-
-RENTAL_SETTING {
-    uuid property_id PK "property.id"
-    number rent
-    number term "12"
+    number quantity "12"
     enum unit "month"
+    number price
+    enum status
     timestamp created_at
-    timestamp updated_at
 }
-
-PROPERTY ||--|| RENTAL_SETTING : "has"
-```
-
-### Property & Applicants
-
-```mermaid
-erDiagram
 
 APPLICANTS {
     int id PK
@@ -128,14 +87,12 @@ LISTING {
     uuid id PK
     uuid property_id FK "property.id"
     timestamp created_at
-    timestamp updated_at
 }
 
+PROPERTY ||--|| RENTAL_SETTINGS : "has"
 PROPERTY ||--|| LISTING : "references"
 PROPERTY ||--o{ APPLICANTS : "has"
 ```
-
-#### Applicants Sources
 
 ```mermaid
 erDiagram
