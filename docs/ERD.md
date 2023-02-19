@@ -48,11 +48,10 @@ erDiagram
 
 ---
 
-### Property & Rental Rates
+### Entity Attributes
 
 ```mermaid
 erDiagram
-
 PROPERTY {
     uuid id PK
     text name
@@ -61,6 +60,13 @@ PROPERTY {
     timestamp created_at
     timestamp updated_at
 }
+
+```
+
+### Option 1: Property & Rental Rates
+
+```mermaid
+erDiagram
 
 PROPERTY_RATES {
     int id PK
@@ -82,10 +88,26 @@ types {
     text monthly
 }
 
-OWNER ||--o{ PROPERTY : owns
 PROPERTY ||--|| PROPERTY_RATES : "has"
 PROPERTY_RATES ||--|| types : "for"
 PROPERTY_RATE_TYPES ||--|| types : "is"
+```
+
+### Option 2: Property with Rental Setting
+
+```mermaid
+erDiagram
+
+RENTAL_SETTING {
+    uuid property_id PK "property.id"
+    number rent
+    number term "12"
+    enum unit "month"
+    timestamp created_at
+    timestamp updated_at
+}
+
+PROPERTY ||--|| RENTAL_SETTING : "has"
 ```
 
 ### Property & Applicants
@@ -115,6 +137,40 @@ OWNER ||--|| PROPERTY: "owns"
 PROPERTY ||--|| LISTING : "references"
 PROPERTY ||--o{ APPLICANTS : "list"
 APPLICANTS ||--o| LISTING : "can reference"
+```
+
+### Property & Applicants
+
+```mermaid
+erDiagram
+
+APPLICANTS {
+    int id PK
+    uuid property_id FK "property.id"
+    uuid applicant_id FK "users.id"
+    text message
+    timestamp created_at
+    timestamp updated_at
+}
+
+LISTING {
+    uuid id PK
+    uuid property_id FK "property.id"
+    timestamp created_at
+    timestamp updated_at
+}
+
+PROPERTY ||--|| LISTING : "references"
+PROPERTY ||--o{ APPLICANTS : "has"
+```
+
+#### Applicants Sources
+
+```mermaid
+erDiagram
+
+APPLICANTS ||--o| "PROPERTY-PAGE" : "applies on"
+APPLICANTS ||--o| "PROPERTY-LISTING" : "applies on"
 ```
 
 <!--
