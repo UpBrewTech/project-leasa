@@ -119,35 +119,6 @@ APPLICANTS {
     int id PK
     uuid property_id FK "property.id"
     uuid applicant_id FK "users.id"
-    uuid reference FK "listing.id (optional)"
-    text message
-    timestamp created_at
-    timestamp updated_at
-}
-
-LISTING {
-    uuid id PK
-    uuid property_id FK "property.id"
-    timestamp created_at
-    timestamp updated_at
-}
-
-OWNER ||--o| LISTING : "publishes"
-OWNER ||--|| PROPERTY: "owns"
-PROPERTY ||--|| LISTING : "references"
-PROPERTY ||--o{ APPLICANTS : "list"
-APPLICANTS ||--o| LISTING : "can reference"
-```
-
-### Property & Applicants
-
-```mermaid
-erDiagram
-
-APPLICANTS {
-    int id PK
-    uuid property_id FK "property.id"
-    uuid applicant_id FK "users.id"
     text message
     timestamp created_at
     timestamp updated_at
@@ -169,39 +140,6 @@ PROPERTY ||--o{ APPLICANTS : "has"
 ```mermaid
 erDiagram
 
-APPLICANTS ||--o| "PROPERTY-PAGE" : "applies on"
-APPLICANTS ||--o| "PROPERTY-LISTING" : "applies on"
+APPLICANTS ||--o| "PROPERTY PAGE" : "from"
+APPLICANTS ||--o| "PROPERTY LISTING" : "from"
 ```
-
-<!--
-### Tenant Invite
-
-```mermaid
-erDiagram
-
-INVITES {
-    uuid id PK
-    uuid property_id FK "property.id"
-    string email
-    enum status
-    timestamp expires_at
-    timestamp created_at
-    timestamp updated_at
-}
-
-INVITE_STATUS {
-    text key PK
-    text description
-}
-
-status {
-    text pending
-}
-
-
-OWNER ||--o| INVITES: "sends an invitation"
-PROPERTY ||--|| INVITES : "is included"
-INVITES ||--|| status : "will be"
-status }|--|{ INVITE_STATUS : "are"
-```
--->
