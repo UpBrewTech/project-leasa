@@ -62,12 +62,11 @@ After setting up a Property; owners can
 - Invite a Tenant via "Send Invite" button
 - Send Invite modal will have email input
 - send email
-  - title: "Leasa Tenant Invite"
+  - title: "Leasa Property"
   - body
-    - `{owner.name}` has invited you to `{property.name}`
+    - Check out `{property.name}`
     - include property details
-    - include enabled/selected property_rate
-    - include "Accept" or "Decline" button
+    - include "View Property" link
 
 **Tenant Invite Sequence**
 
@@ -80,10 +79,10 @@ sequenceDiagram
     activate O
     O->>S: send a tenant invite
     activate S
-    NOTE right of O: with selected Property and Rental Rate
+    NOTE right of O: with selected Property
     S-)S: create email
     S-)T: send Invite Email
-    NOTE right of S: Property Details and Rental Rate
+    NOTE right of S: link to Property Page
     S--)O: sent invite notification
     deactivate O
     deactivate S

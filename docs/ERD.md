@@ -65,7 +65,7 @@ PROPERTY {
 PROPERTY_RATES {
     int id PK
     uuid property_id FK "property.id"
-    enum type FK "property_rate_types.key"
+    enum type  "property_rate_types.key"
     text description
     integer amount
     boolean enable
@@ -79,18 +79,45 @@ PROPERTY_RATE_TYPES {
 }
 
 types {
-    text daily
-    text weekly
     text monthly
-    text yearly
 }
 
 OWNER ||--o{ PROPERTY : owns
-PROPERTY ||--o{ PROPERTY_RATES : "has"
+PROPERTY ||--|| PROPERTY_RATES : "has"
 PROPERTY_RATES ||--|| types : "for"
-PROPERTY_RATE_TYPES }|--|{ types : "are"
+PROPERTY_RATE_TYPES ||--|| types : "is"
 ```
 
+### Property & Applicants
+
+```mermaid
+erDiagram
+
+APPLICANTS {
+    int id PK
+    uuid property_id FK "property.id"
+    uuid applicant_id FK "users.id"
+    uuid reference FK "listing.id (optional)"
+    text message
+    timestamp created_at
+    timestamp updated_at
+}
+
+LISTING {
+    uuid id PK
+    uuid property_id FK "property.id"
+    timestamp created_at
+    timestamp updated_at
+}
+
+OWNER ||--o| LISTING : "publishes"
+OWNER ||--|| PROPERTY: "owns"
+PROPERTY ||--|| LISTING : "references"
+PROPERTY ||--o{ APPLICANTS : "list"
+APPLICANTS ||--o| LISTING : "can reference"
+```
+
+<!--
 ### Tenant Invite
 
 ```mermaid
@@ -99,9 +126,9 @@ erDiagram
 INVITES {
     uuid id PK
     uuid property_id FK "property.id"
-    int property_rate_id FK "property_rate.id"
-    sting email
-    enum status FK ""
+    string email
+    enum status
+    timestamp expires_at
     timestamp created_at
     timestamp updated_at
 }
@@ -113,13 +140,12 @@ INVITE_STATUS {
 
 status {
     text pending
-    text accepted
-    text rejected
 }
 
 
-OWNER ||--o| INVITES: "sends an"
+OWNER ||--o| INVITES: "sends an invitation"
 PROPERTY ||--|| INVITES : "is included"
 INVITES ||--|| status : "will be"
 status }|--|{ INVITE_STATUS : "are"
 ```
+-->
