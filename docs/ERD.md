@@ -48,9 +48,12 @@ erDiagram
 
 ---
 
-### Property with Rental Settings
+### Property
 
+- a property page is visible to the public
+- users can apply to a property page directly
 - currently a property will only have 1 rental setup
+- property availability will be determined by an active TENANT
 
 ```mermaid
 erDiagram
@@ -64,13 +67,12 @@ PROPERTY {
     timestamp updated_at
 }
 
-RENTAL_SETTINGS {
+PROPERTY_TERMS {
     int id PK
     uuid property_id FK "property.id"
     number quantity "12"
     enum unit "month"
     number price
-    enum status
     timestamp created_at
 }
 
@@ -83,20 +85,20 @@ APPLICANTS {
     timestamp updated_at
 }
 
-LISTING {
-    uuid id PK
-    uuid property_id FK "property.id"
-    timestamp created_at
-}
-
-PROPERTY ||--|| RENTAL_SETTINGS : "has"
-PROPERTY ||--|| LISTING : "references"
+PROPERTY ||--|| PROPERTY_TERMS : "has"
 PROPERTY ||--o{ APPLICANTS : "has"
 ```
 
 ```mermaid
 erDiagram
 
+LISTING {
+    uuid id PK
+    uuid property_id FK "property.id"
+    boolean active
+    timestamp created_at
+}
+
 APPLICANTS ||--o| "PROPERTY PAGE" : "from"
-APPLICANTS ||--o| "PROPERTY LISTING" : "from"
+APPLICANTS ||--o| "LISTING" : "from"
 ```
