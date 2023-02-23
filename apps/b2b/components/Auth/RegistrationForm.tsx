@@ -68,18 +68,18 @@ const RegistrationForm = () => {
   return (
     <form onSubmit={onSubmit} className="grid gap-4">
       <div>
-        <Input placeholder="Name" {...register('name')} />
+        <Input placeholder="Name" register={register('name')} />
         <ErrorMessage message={errors.name?.message} />
       </div>
       <div>
-        <Input type="email" placeholder="Email" {...register('email')} />
+        <Input type="email" placeholder="Email" register={register('email')} />
         <ErrorMessage message={errors.email?.message} />
       </div>
       <div>
         <Input
           type="password"
           placeholder="Password"
-          {...register('password')}
+          register={register('password')}
         />
         <ErrorMessage message={errors.password?.message} />
       </div>
@@ -87,7 +87,7 @@ const RegistrationForm = () => {
         <Input
           type="password"
           placeholder="Confirm Password"
-          {...register('confirm_password')}
+          register={register('confirm_password')}
         />
         <ErrorMessage message={errors.confirm_password?.message} />
       </div>
