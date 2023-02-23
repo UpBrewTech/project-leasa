@@ -30,22 +30,14 @@ const LoginForm = () => {
   return (
     <form onSubmit={onSubmit} className="grid gap-4">
       <div>
-        <Input
-          type="email"
-          id="identifier"
-          name="identifier"
-          register={register}
-          placeholder="Email"
-        />
+        <Input type="email" placeholder="Email" {...register('identifier')} />
         <ErrorMessage message={errors.identifier?.message} />
       </div>
       <div>
         <Input
           type="password"
-          id="password"
-          name="password"
-          register={register}
           placeholder="Password"
+          {...register('password')}
         />
         <ErrorMessage message={errors.password?.message} />
       </div>
