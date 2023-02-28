@@ -1,4 +1,8 @@
 SET check_function_bodies = false;
+
+-- extensions
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- tables
 CREATE TABLE public.users (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
@@ -16,7 +20,7 @@ CREATE TABLE public.user_credentials (
     password text NOT NULL
 );
 CREATE TABLE public.user_providers (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     type text NOT NULL,
     provider text NOT NULL,
     "providerAccountId" text NOT NULL,
