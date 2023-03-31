@@ -101,6 +101,7 @@ export interface StepProps
 
 export const Step = (props: StepProps) => {
   const { title, className, children } = props
+
   return (
     <div className={classnames('w-full', className)}>
       <Typography as="h2" variant="title-section" className="mb-sm">
@@ -127,7 +128,9 @@ export const Stepper: React.FC<StepperProps> = (props) => {
   return (
     <div className="h-auto w-full">
       <Nav {...props} />
-      {steps[active]}
+      {steps.map((step, key) => {
+        if (active === key) return <>{step}</>
+      })}
       <DefaultFooter {...props} />
     </div>
   )
