@@ -11,7 +11,7 @@ interface RowSpanProps extends PropsWithChildren {
 
 const RowSpan = ({ length, children }: RowSpanProps) => {
   return (
-    <tr className="p-xs relative block text-center lg:table-row">
+    <tr className="relative block p-2 text-center lg:table-row">
       <td colSpan={length} className="py-sm">
         {children}
       </td>
@@ -23,7 +23,7 @@ const DataCell = ({ label, render }: { label: string; render: ReactNode }) => {
   return (
     <td
       data-title={label}
-      className="lg:py-sm flex items-center justify-between whitespace-nowrap before:text-xs before:uppercase before:text-gray-500 before:content-[attr(data-title)] lg:table-cell lg:before:content-[]"
+      className="flex items-center justify-between whitespace-nowrap before:text-xs before:uppercase before:text-gray-500 before:content-[attr(data-title)] lg:table-cell lg:py-4 lg:before:content-[]"
     >
       {render}
     </td>
@@ -37,7 +37,7 @@ interface DataRowProps<T> {
 
 export const DataRow = <T extends {}>({ columns, data }: DataRowProps<T>) => {
   return (
-    <tr className="p-xs relative block text-center lg:table-row">
+    <tr className="relative block p-2 text-center lg:table-row">
       {columns.map(({ label, cell }, key) => (
         <DataCell key={key} label={label} render={cell(data)} />
       ))}
@@ -45,18 +45,16 @@ export const DataRow = <T extends {}>({ columns, data }: DataRowProps<T>) => {
   )
 }
 
-export interface DataTableProps<T> {
-  loading: boolean
+interface DataTableProps<T> {
+  loading?: boolean
   columns: Column<T>[]
   data?: T[]
-  dataCount?: number
 }
 
 export const DataTable = <T extends { id: any }>({
   loading,
   columns,
   data,
-  dataCount,
 }: DataTableProps<T>) => {
   return (
     <table className="w-full table-auto">
@@ -64,7 +62,7 @@ export const DataTable = <T extends { id: any }>({
         <tr>
           {columns.map(({ label }, key) => (
             <th key={key} className="font-medium tracking-wide">
-              <span className="p-sm flex items-center justify-center">
+              <span className="flex items-center justify-center p-4">
                 {label}
               </span>
             </th>
@@ -73,16 +71,15 @@ export const DataTable = <T extends { id: any }>({
       </thead>
       <tbody className="block divide-y divide-dashed text-sm lg:table-row-group">
         {(loading && <RowSpan length={columns.length}>loading...</RowSpan>) ||
-          (!dataCount && <RowSpan length={columns.length}>empty...</RowSpan>)}
+          (!data?.length && (
+            <RowSpan length={columns.length}>empty...</RowSpan>
+          ))}
 
         {!loading &&
           data?.map((row) => (
             <DataRow key={row.id} columns={columns} data={row} />
           ))}
       </tbody>
-      <tfoot>
-        <RowSpan length={columns.length}></RowSpan>
-      </tfoot>
     </table>
   )
 }
